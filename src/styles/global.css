@@ -1,0 +1,242 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Theme: Green (inspirado en referencia) */
+  --brand-600: #1f7a4c;
+  --brand-600-rgb: 31 122 76;
+  --brand-700: #16613c;
+  --brand-700-rgb: 22 97 60;
+  --brand-800: #0f4b2e;
+  --brand-800-rgb: 15 75 46;
+  --brand-900: #0b2f1e;
+  --brand-900-rgb: 11 47 30;
+  --brand-gradient-start: #0f4b2e;
+  --brand-gradient-end: #0b2f1e;
+}
+
+html {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  scroll-behavior: smooth;
+  font-size: 16px;
+  height: 100%;
+  /* Soportar Safe Area para iPhones con notch */
+  padding: max(0px, env(safe-area-inset-top)) max(0px, env(safe-area-inset-right)) max(0px, env(safe-area-inset-bottom)) max(0px, env(safe-area-inset-left));
+}
+
+body {
+  background: #ffffff;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Optimización para iPhone X+ y Dynamic Island */
+  padding-top: max(0, env(safe-area-inset-top));
+  padding-bottom: max(0, env(safe-area-inset-bottom));
+  padding-left: max(0, env(safe-area-inset-left));
+  padding-right: max(0, env(safe-area-inset-right));
+}
+
+/* Contraste alto: solo sube legibilidad (opt-in por botón) */
+html[data-contrast="high"] body {
+  color: #111;
+}
+
+html[data-contrast="high"] a {
+  -webkit-tap-highlight-color: rgba(var(--brand-600-rgb), 0.25);
+}
+
+html[data-contrast="high"] :focus-visible {
+  outline: 3px solid rgba(var(--brand-600-rgb), 0.95);
+  outline-offset: 3px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  /* Optimizar toque en móviles */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+button {
+  font-family: inherit;
+  /* Asegurar que los botones sean toqueable (mínimo 44px para iOS) */
+  min-height: 44px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  /* Prevenir imagen borrosa en devices retina */
+  image-rendering: -webkit-optimize-contrast;
+}
+
+input, select, textarea {
+  /* Prevenir zoom en iPhone */
+  font-size: 16px !important;
+  /* Mejorar apariencia en iOS */
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  /* Touch target óptimo */
+  min-height: 44px;
+  padding: 12px;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-600);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-800);
+}
+
+/* Optimización para iOS Safari */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+}
+
+/* Responsive para tablets pequeñas (iPad mini, Galaxy Tab S) */
+@media (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* Responsive para tablets (iPad, Galaxy Tab) */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  /* Optimización de botones para Android */
+  button, a[role="button"] {
+    min-height: 48px;
+    padding: 12px 16px;
+  }
+}
+
+/* Responsive para móviles (iPhone 12-15, Samsung Galaxy A/S series) */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    line-height: 1.5;
+  }
+
+  /* Optimización de espacio en pantallas pequeñas */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  /* Prevenir zoom en input focus */
+  input:focus,
+  select:focus,
+  textarea:focus {
+    font-size: 16px;
+  }
+}
+
+/* Responsive para móviles muy pequeños (iPhone SE, Galaxy A10) */
+@media (max-width: 360px) {
+  html {
+    font-size: 13px;
+  }
+
+  body {
+    line-height: 1.4;
+  }
+}
+
+/* Responsive para pantallas ultra pequeñas (muy raramente usadas) */
+@media (max-width: 320px) {
+  html {
+    font-size: 12px;
+  }
+
+  body {
+    line-height: 1.4;
+  }
+}
+
+/* Optimización para pantallas grandes (Galaxy S Ultra, iPad Pro) */
+@media (min-width: 1200px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+/* Orientación horizontal para móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+  html {
+    font-size: 13px;
+  }
+
+  body {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* Soporte para pantallas AMOLED (evitar quemado) */
+@media (prefers-contrast: more) {
+  body {
+    color: #222;
+  }
+}
+
+/* Respetar preferencia de reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

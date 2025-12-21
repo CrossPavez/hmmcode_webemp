@@ -1,0 +1,92 @@
+---
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import WebServices from '../components/WebServices.astro';
+import CROBanner from '../components/CROBanner.astro';
+import Portfolio from '../components/Portfolio.astro';
+import Contact from '../components/Contact.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Hmmcode" />
+    <meta name="theme-color" content="#0f4b2e" />
+    <meta name="msapplication-TileColor" content="#0f4b2e" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
+    <title
+      data-i18n-es="Hmmcode - Mantenimiento PC, Laptops y Consolas"
+      data-i18n-en="Hmmcode - PC, Laptop & Console Maintenance"
+    >Hmmcode - Mantenimiento PC, Laptops y Consolas</title>
+    <meta
+      name="description"
+      content="Somos especialistas en mantenimiento, reparación y optimización de PC, Laptops y Consolas. Servicios profesionales de mantenimiento."
+      data-i18n-attr="content"
+      data-i18n-es="Somos especialistas en mantenimiento, reparación y optimización de PC, Laptops y Consolas. Servicios profesionales de mantenimiento."
+      data-i18n-en="We specialize in maintenance, repair and optimization for PCs, laptops and consoles. Professional maintenance services."
+    />
+    <meta
+      property="og:title"
+      content="Hmmcode - Mantenimiento PC, Laptops y Consolas"
+      data-i18n-attr="content"
+      data-i18n-es="Hmmcode - Mantenimiento PC, Laptops y Consolas"
+      data-i18n-en="Hmmcode - PC, Laptop & Console Maintenance"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:description"
+      content="Somos especialistas en mantenimiento, reparación y optimización de PC, Laptops y Consolas."
+      data-i18n-attr="content"
+      data-i18n-es="Somos especialistas en mantenimiento, reparación y optimización de PC, Laptops y Consolas."
+      data-i18n-en="We specialize in maintenance, repair and optimization for PCs, laptops and consoles."
+    />
+  </head>
+  <body>
+    <Header />
+    <Hero />
+    <Services />
+    <WebServices />
+    <CROBanner 
+      title="⚡ Agenda tu servicio hoy"
+      titleEn="⚡ Book your service today"
+      subtitle="Atención rápida para PC, laptops y consolas"
+      subtitleEn="Fast support for PCs, laptops and consoles"
+      urgencyText="Respuesta en menos de 24 horas"
+      urgencyTextEn="Reply in under 24 hours"
+      ctaText="Agendar Ahora"
+      ctaTextEn="Book now"
+      ctaLink="/servicio-formateo"
+    />
+    <Portfolio />
+    <Contact />
+    <WhatsAppButton 
+      phoneNumber="+56948645816"
+      message="Hola, me interesa conocer más sobre los servicios de Hmmcode"
+      messageEn="Hi, I want to learn more about Hmmcode services"
+      position="bottom-right"
+      showLabel={true}
+    />
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

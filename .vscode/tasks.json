@@ -1,0 +1,63 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Copy logo.png to public",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Copy-Item -Force \"${workspaceFolder}\\\\logo.png\" \"${workspaceFolder}\\\\public\\\\logo.png\""
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Git init + first commit",
+			"type": "shell",
+			"command": "git --version; if not exist .git (git init); git add -A; git status; git commit -m \"Initial commit\"",
+			"isBackground": false
+		},
+		{
+			"label": "astro: build",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "astro: build (post-wa-links)",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "astro: dev (127.0.0.1:4321)",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"dev",
+				"--",
+				"--host",
+				"127.0.0.1",
+				"--port",
+				"4321"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

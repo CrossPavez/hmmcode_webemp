@@ -1,0 +1,214 @@
+---
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Hmmcode</h4>
+        <p
+          data-i18n-es="Mantenimiento y optimización de PC, laptops y consolas"
+          data-i18n-en="Maintenance and optimization for PCs, laptops and consoles"
+        >Mantenimiento y optimización de PC, laptops y consolas</p>
+      </div>
+
+      <div class="footer-section">
+        <h4 data-i18n-es="Servicios" data-i18n-en="Services">Servicios</h4>
+        <ul>
+          <li><a href="#servicios" data-i18n-es="Mantenimiento Básico" data-i18n-en="Basic Maintenance">Mantenimiento Básico</a></li>
+          <li><a href="#servicios" data-i18n-es="Mantenimiento Integral" data-i18n-en="Full Maintenance">Mantenimiento Integral</a></li>
+          <li><a href="#servicios" data-i18n-es="Mantenimiento Premium" data-i18n-en="Premium Maintenance">Mantenimiento Premium</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4 data-i18n-es="Enlaces" data-i18n-en="Links">Enlaces</h4>
+        <ul>
+          <li><a href="#inicio" data-i18n-es="Inicio" data-i18n-en="Home">Inicio</a></li>
+          <li><a href="#servicios" data-i18n-es="Servicios" data-i18n-en="Services">Servicios</a></li>
+          <li><a href="#portfolio" data-i18n-es="Portafolio" data-i18n-en="Portfolio">Portafolio</a></li>
+          <li><a href="#contacto" data-i18n-es="Contacto" data-i18n-en="Contact">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4 data-i18n-es="Contáctanos" data-i18n-en="Contact">Contáctanos</h4>
+        <ul class="social-links">
+          <li>
+            <a
+              href="https://wa.me/56948645816?text=Hola%20Hmmcode,%20me%20interesa%20conocer%20más%20sobre%20vuestros%20servicios"
+              data-i18n-attr="href"
+              data-i18n-es="https://wa.me/56948645816?text=Hola%20Hmmcode,%20me%20interesa%20conocer%20más%20sobre%20vuestros%20servicios"
+              data-i18n-en="https://wa.me/56948645816?text=Hi%20Hmmcode,%20I%20want%20to%20learn%20more%20about%20your%20services"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              📱 <span data-i18n-es="WhatsApp" data-i18n-en="WhatsApp">WhatsApp</span>: +569 48645816
+            </a>
+          </li>
+          <li><a href="mailto:hmmcodecl@gmail.com">✉️ <span data-i18n-es="Email" data-i18n-en="Email">Email</span>: hmmcodecl@gmail.com</a></li>
+          <li><p data-i18n-es="⏱️ Respuesta en <24h" data-i18n-en="⏱️ Reply in <24h">⏱️ Respuesta en &lt;24h</p></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p
+        data-i18n-es="© 2025 hmmcode. Todos los derechos reservados."
+        data-i18n-en="© 2025 hmmcode. All rights reserved."
+      >&copy; 2025 hmmcode. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #1a1a1a;
+    color: white;
+    padding: 3rem 2rem 2rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: start;
+  }
+
+  .footer-section h4 {
+    color: var(--brand-600);
+    margin: 0 0 1rem 0;
+  }
+
+  .footer-section p {
+    color: #ccc;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-section ul li {
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-section ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-section ul li a:hover {
+    color: var(--brand-600);
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+    color: #999;
+  }
+
+  @media (max-width: 1024px) {
+    .footer {
+      padding: 2.5rem 2rem 2rem;
+    }
+
+    .footer-section h4 {
+      font-size: 0.95rem;
+    }
+
+    .footer-section p {
+      font-size: 0.9rem;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.7rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer {
+      padding: 2rem 1.5rem;
+    }
+
+    .footer-content {
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .footer-section h4 {
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-section p {
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.6rem;
+      font-size: 0.85rem;
+    }
+
+    .social-links {
+      gap: 0.8rem;
+    }
+
+    .footer-bottom {
+      padding-top: 1.5rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer {
+      padding: 1.5rem 1rem;
+    }
+
+    .footer-content {
+      gap: 1.2rem;
+      grid-template-columns: 1fr;
+    }
+
+    .footer-section h4 {
+      font-size: 0.85rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-section p {
+      font-size: 0.8rem;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .social-links {
+      gap: 0.6rem;
+      justify-content: center;
+    }
+
+    .footer-bottom {
+      padding-top: 1rem;
+      font-size: 0.75rem;
+    }
+  }
+</style>

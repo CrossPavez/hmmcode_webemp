@@ -1,0 +1,258 @@
+---
+---
+
+<section class="banner">
+  <div class="container">
+    <div class="banner-content">
+      <div class="banner-text">
+        <h1 data-i18n-es="Formateo de Notebook y Computadores" data-i18n-en="Laptop & Computer Formatting">Formateo de Notebook y Computadores</h1>
+        <p class="tagline" data-i18n-es="Formateo de notebook y computadores con las 3B" data-i18n-en="Fast, affordable and reliable formatting">
+          Formateo de notebook y computadores con las 3B
+        </p>
+        <ul class="benefits">
+          <li data-i18n-es="✓ Reinstalación del SO" data-i18n-en="✓ OS reinstallation">✓ Reinstalación del SO</li>
+          <li data-i18n-es="✓ Limpieza profunda" data-i18n-en="✓ Deep cleanup">✓ Limpieza profunda</li>
+          <li data-i18n-es="✓ Optimización de rendimiento" data-i18n-en="✓ Performance optimization">✓ Optimización de rendimiento</li>
+          <li data-i18n-es="✓ A domicilio en Santiago" data-i18n-en="✓ On-site in Santiago">✓ A domicilio en Santiago</li>
+        </ul>
+        <div class="price-box">
+          <span class="label" data-i18n-es="Desde" data-i18n-en="From">Desde</span>
+          <span class="price">$20.000</span>
+          <span class="subtitle" data-i18n-es="Formateo básico" data-i18n-en="Basic formatting">Formateo básico</span>
+        </div>
+        <a href="#contacto" class="cta-button" data-i18n-es="Solicitar servicio" data-i18n-en="Request service">Solicitar servicio</a>
+      </div>
+      <div class="banner-image">
+        <div class="pc-illustration">
+          <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+            <!-- Monitor -->
+            <rect x="40" y="30" width="220" height="140" rx="10" fill="var(--brand-600)" stroke="var(--brand-800)" stroke-width="3"/>
+            <rect x="50" y="40" width="200" height="120" rx="8" fill="#e8eaf6"/>
+            <!-- Screen content -->
+            <circle cx="150" cy="80" r="15" fill="var(--brand-600)" opacity="0.3"/>
+            <line x1="70" y1="110" x2="230" y2="110" stroke="var(--brand-600)" stroke-width="2" opacity="0.3"/>
+            <line x1="70" y1="125" x2="230" y2="125" stroke="var(--brand-600)" stroke-width="2" opacity="0.3"/>
+            <!-- Base -->
+            <rect x="110" y="170" width="80" height="15" rx="3" fill="var(--brand-800)"/>
+            <!-- Stand -->
+            <rect x="140" y="185" width="20" height="35" fill="var(--brand-800)"/>
+            <!-- Keyboard -->
+            <g id="keyboard">
+              <rect x="30" y="210" width="240" height="25" rx="4" fill="#333" stroke="var(--brand-600)" stroke-width="2"/>
+              <circle cx="50" cy="222" r="3" fill="var(--brand-600)" opacity="0.5"/>
+              <circle cx="70" cy="222" r="3" fill="var(--brand-600)" opacity="0.5"/>
+              <circle cx="90" cy="222" r="3" fill="var(--brand-600)" opacity="0.5"/>
+              <circle cx="150" cy="222" r="4" fill="var(--brand-600)" opacity="0.5"/>
+              <circle cx="210" cy="222" r="3" fill="var(--brand-600)" opacity="0.5"/>
+              <circle cx="230" cy="222" r="3" fill="var(--brand-600)" opacity="0.5"/>
+              <circle cx="250" cy="222" r="3" fill="var(--brand-600)" opacity="0.5"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .banner {
+    background: linear-gradient(135deg, var(--brand-gradient-start) 0%, var(--brand-gradient-end) 100%);
+    color: white;
+    padding: 4rem 2rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .banner-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .banner-text h1 {
+    font-size: 2.8rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+    margin: 0 0 1.5rem 0;
+    opacity: 0.95;
+  }
+
+  .benefits {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+  }
+
+  .benefits li {
+    font-size: 1rem;
+    margin: 0.6rem 0;
+    opacity: 0.95;
+  }
+
+  .price-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .price-box .label {
+    display: block;
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 0.3rem;
+  }
+
+  .price-box .price {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.03em;
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .price-box .subtitle {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: white;
+    color: var(--brand-700);
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .banner-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pc-illustration {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
+
+  .pc-illustration svg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2));
+  }
+
+  @media (max-width: 1024px) {
+    .banner {
+      padding: 3rem 2rem;
+    }
+
+    .banner-text h1 {
+      font-size: 2.3rem;
+    }
+
+    .tagline {
+      font-size: 1.1rem;
+    }
+
+    .price-box .price {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .banner {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .banner-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .banner-text h1 {
+      font-size: 1.8rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+    }
+
+    .benefits li {
+      font-size: 0.95rem;
+    }
+
+    .price-box {
+      padding: 1.2rem;
+    }
+
+    .price-box .price {
+      font-size: 1.8rem;
+    }
+
+    .cta-button {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .banner {
+      padding: 2rem 1rem;
+    }
+
+    .banner-text h1 {
+      font-size: 1.5rem;
+    }
+
+    .tagline {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .benefits li {
+      font-size: 0.9rem;
+      margin: 0.5rem 0;
+    }
+
+    .price-box .price {
+      font-size: 1.5rem;
+    }
+
+    .cta-button {
+      font-size: 0.95rem;
+      padding: 0.9rem 1.5rem;
+    }
+
+    .banner-image {
+      max-height: 200px;
+    }
+  }
+</style>

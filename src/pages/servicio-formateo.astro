@@ -1,0 +1,99 @@
+---
+import Header from '../components/Header.astro';
+import ServiceHardwareBanner from '../components/ServiceHardwareBanner.astro';
+import ServiceReviews from '../components/ServiceReviews.astro';
+import ServiceDetails from '../components/ServiceDetails.astro';
+import ServiceFAQ from '../components/ServiceFAQ.astro';
+import CROBanner from '../components/CROBanner.astro';
+import Contact from '../components/Contact.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#0f4b2e" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    
+    <title
+      data-i18n-es="Formateo de Notebooks y Computadores a Domicilio con las 3B"
+      data-i18n-en="On-site Laptop & Computer Formatting (Fast, Affordable, Reliable)"
+    >Formateo de Notebooks y Computadores a Domicilio con las 3B</title>
+    <meta
+      name="description"
+      content="Servicio de formateo de notebooks y computadores a domicilio en Santiago de Chile. Rápido, económico y confiable, con un técnico experto. Desde $20.000"
+      data-i18n-attr="content"
+      data-i18n-es="Servicio de formateo de notebooks y computadores a domicilio en Santiago de Chile. Rápido, económico y confiable, con un técnico experto. Desde $20.000"
+      data-i18n-en="On-site laptop and computer formatting in Santiago, Chile. Fast, affordable and reliable, with an expert technician. From $20,000."
+    />
+    
+    <!-- Schema for Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Hmmcode - Formateo de Computadores",
+      "image": "https://hmmcode.cl/logo.png",
+      "description": "Servicio de formateo de notebooks y computadores a domicilio en Santiago",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Santiago",
+        "addressLocality": "Santiago",
+        "addressRegion": "RM",
+        "postalCode": "",
+        "addressCountry": "CL"
+      },
+      "priceRange": "$20000-$40000",
+      "url": "https://hmmcode.cl/servicio-formateo",
+      "telephone": "+56948645816"
+    }
+    </script>
+  </head>
+  
+  <body>
+    <Header />
+    <ServiceHardwareBanner />
+    <ServiceReviews />
+    <ServiceDetails />
+    <CROBanner 
+      title="🚀 ¡Agenda Tu Servicio Hoy!"
+      titleEn="🚀 Book your service today!"
+      subtitle="Formateo Profesional a Domicilio"
+      subtitleEn="Professional on-site formatting"
+      urgencyText="Respuesta en menos de 24 horas"
+      ctaText="Cotizar por WhatsApp"
+      urgencyTextEn="Reply in under 24 hours"
+      ctaTextEn="Get a Quote on WhatsApp"
+      ctaLink="https://wa.me/56948645816?text=Hola,%20me%20interesa%20el%20servicio%20de%20formateo"
+      ctaLinkEn="https://wa.me/56948645816?text=Hi,%20I%20am%20interested%20in%20the%20formatting%20service"
+    />
+    <ServiceFAQ />
+    <Contact />
+    <WhatsAppButton 
+      phoneNumber="+56948645816"
+      message="Hola Hmmcode, me interesa agendar un servicio de formateo"
+      messageEn="Hi Hmmcode, I'd like to book a formatting service"
+      position="bottom-right"
+      showLabel={true}
+    />
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

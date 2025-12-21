@@ -1,0 +1,289 @@
+---
+/**
+ * CRO Trust Section - Elementos de confianza y prueba social
+ * Muestra: Clientes satisfechos, Garantía, Profesionalismo, Respuesta rápida
+ */
+
+interface Props {
+  showCustomerCount?: boolean;
+  showGuarantee?: boolean;
+  showResponseTime?: boolean;
+  showExperience?: boolean;
+}
+
+const {
+  showCustomerCount = true,
+  showGuarantee = true,
+  showResponseTime = true,
+  showExperience = true,
+} = Astro.props;
+---
+
+<section class="cro-trust">
+  <div class="trust-container">
+    {showCustomerCount && (
+      <div class="trust-item">
+        <div class="stat">
+          <span class="number">500+</span>
+          <span class="label" data-i18n-es="Clientes Satisfechos" data-i18n-en="Happy Clients">Clientes Satisfechos</span>
+        </div>
+        <p class="description" data-i18n-es="Confianza de cientos de clientes en toda la región" data-i18n-en="Trusted by hundreds of clients across the region">Confianza de cientos de clientes en toda la región</p>
+      </div>
+    )}
+
+    {showResponseTime && (
+      <div class="trust-item">
+        <div class="stat">
+          <span class="number">&lt;24h</span>
+          <span class="label" data-i18n-es="Respuesta Rápida" data-i18n-en="Fast Reply">Respuesta Rápida</span>
+        </div>
+        <p class="description" data-i18n-es="Te contactamos el mismo día o al día siguiente" data-i18n-en="We contact you the same day or the next day">Te contactamos el mismo día o al día siguiente</p>
+      </div>
+    )}
+
+    {showExperience && (
+      <div class="trust-item">
+        <div class="stat">
+          <span class="number">10+</span>
+          <span class="label" data-i18n-es="Años Experiencia" data-i18n-en="Years of Experience">Años Experiencia</span>
+        </div>
+        <p class="description" data-i18n-es="Técnicos certificados con amplia trayectoria" data-i18n-en="Certified technicians with extensive experience">Técnicos certificados con amplia trayectoria</p>
+      </div>
+    )}
+
+    {showGuarantee && (
+      <div class="trust-item">
+        <div class="stat">
+          <span class="number">30 Días</span>
+          <span class="label" data-i18n-es="Garantía Total" data-i18n-en="Full Warranty">Garantía Total</span>
+        </div>
+        <p class="description" data-i18n-es="Si no estás satisfecho, repetimos el trabajo sin costo" data-i18n-en="If you’re not satisfied, we redo the work at no extra cost">Si no estás satisfecho, repetimos el trabajo sin costo</p>
+      </div>
+    )}
+  </div>
+
+  <div class="social-proof">
+    <h3 data-i18n-es="✓ Verificado por Clientes Reales" data-i18n-en="✓ Verified by Real Clients">✓ Verificado por Clientes Reales</h3>
+    <div class="proof-items">
+      <div class="proof-item">
+        <span class="rating">⭐⭐⭐⭐⭐</span>
+        <p data-i18n-es='"Excelente servicio, técnico profesional y puntual"' data-i18n-en='"Excellent service—professional and on time"'>"Excelente servicio, técnico profesional y puntual"</p>
+        <span class="author">- Carlos M.</span>
+      </div>
+      <div class="proof-item">
+        <span class="rating">⭐⭐⭐⭐⭐</span>
+        <p data-i18n-es='"Mi laptop quedó como nueva. Muy recomendado"' data-i18n-en='"My laptop was like new. Highly recommended"'>"Mi laptop quedó como nueva. Muy recomendado"</p>
+        <span class="author">- Ana G.</span>
+      </div>
+      <div class="proof-item">
+        <span class="rating">⭐⭐⭐⭐⭐</span>
+        <p data-i18n-es='"Rápido, confiable y a buen precio"' data-i18n-en='"Fast, reliable and a fair price"'>"Rápido, confiable y a buen precio"</p>
+        <span class="author">- Jorge L.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cro-trust {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 4rem 2rem;
+    margin: 3rem 0;
+    border-radius: 16px;
+  }
+
+  .trust-container {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  .trust-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .trust-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    border-color: #667eea;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .label {
+    font-size: 0.95rem;
+    color: #666;
+    font-weight: 600;
+  }
+
+  .description {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  .social-proof {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  .social-proof h3 {
+    text-align: center;
+    margin: 0 0 2rem 0;
+    font-size: 1.3rem;
+    color: #333;
+  }
+
+  .proof-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .proof-item {
+    padding: 1.5rem;
+    background: #f9fafb;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .rating {
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+  }
+
+  .proof-item p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #555;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .author {
+    font-size: 0.85rem;
+    color: #999;
+    font-weight: 500;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .cro-trust {
+      padding: 2.5rem 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .trust-container {
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .trust-item {
+      padding: 1.5rem;
+    }
+
+    .number {
+      font-size: 2rem;
+    }
+
+    .social-proof {
+      padding: 2rem 1.5rem;
+    }
+
+    .proof-items {
+      gap: 1.5rem;
+    }
+
+    .proof-item {
+      padding: 1.25rem;
+      border-left-width: 3px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cro-trust {
+      padding: 2rem 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .trust-container {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .trust-item {
+      padding: 1.25rem;
+    }
+
+    .number {
+      font-size: 1.8rem;
+    }
+
+    .label {
+      font-size: 0.9rem;
+    }
+
+    .social-proof {
+      padding: 1.5rem;
+    }
+
+    .social-proof h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .proof-items {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .proof-item {
+      padding: 1rem;
+      border-left-width: 3px;
+    }
+
+    .proof-item p {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trust-item {
+      transition: none;
+    }
+
+    .trust-item:hover {
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Información de sitemap
+Sitemap: https://hmmcode.vercel.app/sitemap.xml
+
+# Páginas importantes
+Allow: /
+Allow: /servicio-formateo
+
+# No indexar búsqueda ni parámetros
+Disallow: /search
+Disallow: /admin
+Disallow: /*?*
+Disallow: /*.pdf$
+Disallow: /draft/
+
+# Crawl delay
+Crawl-delay: 1
+
+# Comentarios sobre la configuración
+# - Permitimos a todos los bots acceder al sitio
+# - Proveemos ubicación del sitemap
+# - Evitamos indexar parámetros de búsqueda
+# - Rate limiting de 1 segundo entre requests

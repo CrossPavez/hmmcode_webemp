@@ -1,0 +1,448 @@
+---
+---
+
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <a class="brand" href="/" aria-label="Hmmcode">
+        <span class="brand-name">Hmmcode</span>
+      </a>
+
+      <nav
+        class="nav"
+        aria-label="Navegación principal"
+        data-i18n-attr="aria-label"
+        data-i18n-es="Navegación principal"
+        data-i18n-en="Main navigation"
+      >
+        <ul>
+          <li><a href="/" data-i18n="home">Inicio</a></li>
+          <li><a href="/#servicios" data-i18n="services">Servicios</a></li>
+          <li><a href="/servicio-formateo" data-i18n="format">Formateo</a></li>
+          <li><a href="/#portfolio" data-i18n="portfolio">Portafolio</a></li>
+          <li><a href="/#contacto" data-i18n="contact">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div
+        class="controls"
+        aria-label="Preferencias"
+        data-i18n-attr="aria-label"
+        data-i18n-es="Preferencias"
+        data-i18n-en="Preferences"
+      >
+        <button class="control-btn control-btn--contrast" type="button" id="contrastToggle" aria-pressed="false" data-i18n="contrast">
+          Contraste
+        </button>
+        <button class="control-btn control-btn--lang" type="button" id="langToggle" aria-label="Cambiar idioma" data-lang="es">
+          ES
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  const STORAGE_LANG_KEY = 'hmm_lang';
+  const STORAGE_CONTRAST_KEY = 'hmm_contrast';
+
+  const i18n = {
+    es: {
+      home: 'Inicio',
+      services: 'Servicios',
+      format: 'Formateo',
+      portfolio: 'Portafolio',
+      contact: 'Contacto',
+      contrast: 'Contraste',
+      langAria: 'Cambiar idioma',
+    },
+    en: {
+      home: 'Home',
+      services: 'Services',
+      format: 'Format',
+      portfolio: 'Portfolio',
+      contact: 'Contact',
+      contrast: 'Contrast',
+      langAria: 'Change language',
+    },
+  };
+
+  function translateInlineElements(lang) {
+    const isEnglish = (lang || 'es').toLowerCase().startsWith('en');
+    const selector = '[data-i18n-es],[data-i18n-en]';
+
+    document.querySelectorAll(selector)?.forEach((el) => {
+      const valueEs = el.getAttribute('data-i18n-es');
+      const valueEn = el.getAttribute('data-i18n-en');
+      const nextValue = (isEnglish ? valueEn : valueEs) ?? valueEs ?? valueEn;
+      if (!nextValue) return;
+
+      const targetAttr = el.getAttribute('data-i18n-attr');
+      if (targetAttr) {
+        el.setAttribute(targetAttr, nextValue);
+        return;
+      }
+
+      if (el.hasAttribute('data-i18n-html')) {
+        el.innerHTML = nextValue;
+        return;
+      }
+
+      el.textContent = nextValue;
+    });
+  }
+
+  function applyLanguage(lang) {
+    const dict = i18n[lang] ?? i18n.es;
+    document.documentElement.dataset.lang = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]')?.forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      if (key && dict[key]) el.textContent = dict[key];
+    });
+
+    translateInlineElements(lang);
+
+    const langBtn = document.getElementById('langToggle');
+    if (langBtn) {
+      langBtn.textContent = (lang || 'es').toUpperCase();
+      langBtn.setAttribute('aria-label', dict.langAria);
+      langBtn.setAttribute('data-lang', lang);
+    }
+
+    try {
+      window.dispatchEvent(new CustomEvent('hmm:langchange', { detail: { lang } }));
+    } catch {
+      // no-op
+    }
+  }
+
+  function applyContrast(isHigh) {
+    if (isHigh) {
+      document.documentElement.dataset.contrast = 'high';
+    } else {
+      delete document.documentElement.dataset.contrast;
+    }
+    const btn = document.getElementById('contrastToggle');
+    if (btn) btn.setAttribute('aria-pressed', String(Boolean(isHigh)));
+  }
+
+  function initNavbarPrefs() {
+    const savedLang = localStorage.getItem(STORAGE_LANG_KEY) || 'es';
+    const savedContrast = localStorage.getItem(STORAGE_CONTRAST_KEY) === 'high';
+
+    applyLanguage(savedLang);
+    applyContrast(savedContrast);
+
+    const contrastBtn = document.getElementById('contrastToggle');
+    const langBtn = document.getElementById('langToggle');
+
+    contrastBtn?.addEventListener('click', () => {
+      const isHigh = document.documentElement.dataset.contrast === 'high';
+      const next = !isHigh;
+      applyContrast(next);
+      localStorage.setItem(STORAGE_CONTRAST_KEY, next ? 'high' : 'normal');
+    });
+
+    langBtn?.addEventListener('click', () => {
+      const current = (localStorage.getItem(STORAGE_LANG_KEY) || 'es').toLowerCase();
+      const next = current === 'es' ? 'en' : 'es';
+      localStorage.setItem(STORAGE_LANG_KEY, next);
+      applyLanguage(next);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavbarPrefs);
+  } else {
+    initNavbarPrefs();
+  }
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: white;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  }
+
+  .header::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(var(--brand-600-rgb), 0.85) 50%, transparent 100%);
+    opacity: 0.6;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: white;
+    text-decoration: none;
+    min-height: 44px;
+    padding: 6px 2px;
+  }
+
+  .brand-name {
+    font-size: 1.08rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+
+  .controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .control-btn {
+    appearance: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1;
+    cursor: pointer;
+    min-height: 44px;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .control-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .control-btn:focus-visible {
+    outline: 2px solid rgba(var(--brand-600-rgb), 0.95);
+    outline-offset: 2px;
+  }
+
+  /* Contraste alto: sin cambiar la paleta base, solo sube legibilidad */
+  :global(html[data-contrast="high"]) .header {
+    background: rgba(0, 0, 0, 0.88);
+    border-bottom-color: rgba(255, 255, 255, 0.18);
+  }
+
+  :global(html[data-contrast="high"]) .nav a {
+    opacity: 1;
+  }
+
+  .nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.6rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    opacity: 0.92;
+    transition: opacity 0.2s ease;
+    /* Touch target mínimo 44px */
+    padding: 8px 4px;
+    display: inline-block;
+    font-size: 0.95rem;
+    position: relative;
+  }
+
+  .nav a:hover {
+    opacity: 1;
+  }
+
+  .nav a::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    bottom: 2px;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(var(--brand-600-rgb), 0.95);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.2s ease;
+  }
+
+  .nav a:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Optimización para iOS (iPhone 13-15, incluyendo Pro Max) */
+  @supports (padding: max(0px)) {
+    .header {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .header {
+      padding: 0.85rem 0;
+    }
+
+    .nav ul { gap: 1.1rem; }
+  }
+
+  @media (max-width: 768px) {
+    .header {
+      padding: 0.8rem 0;
+    }
+
+    .header-content {
+      /* En móvil: logo + controles en la misma fila; nav abajo */
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .brand {
+      order: 1;
+      justify-content: flex-start;
+      min-height: 40px;
+    }
+
+    .controls {
+      order: 2;
+      margin-left: auto;
+      justify-content: flex-end;
+      flex-wrap: nowrap;
+      gap: 0.45rem;
+    }
+
+    .nav {
+      order: 3;
+      flex-basis: 100%;
+      width: 100%;
+    }
+
+    .nav ul {
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      font-size: 0.9rem;
+      padding: 10px 8px;
+      /* Touch target 44px mínimo */
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .control-btn {
+      font-size: 0.82rem;
+      padding: 6px 10px;
+      min-height: 40px;
+    }
+
+    .control-btn--lang {
+      padding: 6px 10px;
+      min-width: 44px;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header {
+      padding: 0.75rem 0;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .brand-name { font-size: 0.98rem; }
+
+    .brand {
+      min-height: 38px;
+    }
+
+    .nav ul {
+      gap: 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .nav a {
+      font-size: 0.8rem;
+      padding: 12px 6px;
+      min-height: 44px;
+    }
+
+    .controls {
+      gap: 0.4rem;
+    }
+
+    .control-btn {
+      font-size: 0.78rem;
+      padding: 6px 9px;
+      min-height: 38px;
+    }
+
+    .control-btn--contrast {
+      padding-left: 9px;
+      padding-right: 9px;
+    }
+
+    .control-btn--lang {
+      min-width: 40px;
+      padding-left: 9px;
+      padding-right: 9px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .nav ul {
+      gap: 0.6rem;
+    }
+
+    .nav a {
+      font-size: 0.75rem;
+      padding: 10px 4px;
+    }
+  }
+
+  /* Optimización para orientación horizontal (landscape) */
+  @media (max-height: 500px) {
+    .header {
+      padding: 0.55rem 0;
+    }
+
+    .header-content {
+      gap: 0.5rem;
+    }
+
+    .nav ul {
+      gap: 0.8rem;
+    }
+  }
+</style>

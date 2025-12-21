@@ -1,0 +1,187 @@
+---
+import ServiceCard from './ServiceCard.astro';
+
+const WHATSAPP = '56948645816';
+
+const waLink = (message: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+---
+
+<section class="services" id="servicios">
+  <div class="container">
+    <div class="section-header">
+      <h2 data-i18n-es="Nuestros Servicios" data-i18n-en="Our Services">Nuestros Servicios</h2>
+      <p data-i18n-es="Elige el plan que mejor se adapte a tus necesidades" data-i18n-en="Choose the plan that best fits your needs">
+        Elige el plan que mejor se adapte a tus necesidades
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <ServiceCard
+        title="Mantenimiento Básico"
+        titleEn="Basic Maintenance"
+        description="Limpieza y mantenimiento preventivo para PC, Laptops y Consolas"
+        descriptionEn="Cleaning and preventive maintenance for PCs, laptops and consoles"
+        features={[
+          'Limpieza física completa (polvo, ventiladores)',
+          'Inspección de componentes internos',
+          'Revisión de temperatura',
+          'Limpieza de puertos y conectores',
+          'Pruebas de funcionamiento básicas'
+        ]}
+        featuresEn={[
+          'Full physical cleaning (dust, fans)',
+          'Internal components inspection',
+          'Temperature check',
+          'Ports and connectors cleaning',
+          'Basic functionality tests'
+        ]}
+        price="$25.990"
+        ctaLink={waLink('Hola Hmmcode, quiero cotizar/agendar el servicio: Mantenimiento Básico.')}
+        ctaLinkEn={waLink("Hi Hmmcode, I'd like to get a quote/book the service: Basic Maintenance.")}
+      />
+
+      <ServiceCard
+        title="Mantenimiento Integral"
+        titleEn="Full Maintenance"
+        description="Servicio completo de optimización y reparación de hardware"
+        descriptionEn="Complete hardware optimization and repair service"
+        features={[
+          'Todo del plan Básico incluido',
+          'Cambio de pasta térmica',
+          'Limpieza profunda de filtros',
+          'Diagnóstico avanzado de hardware',
+          'Optimización de software y sistema',
+          'Soporte técnico por whatsapp'
+        ]}
+        featuresEn={[
+          'Everything from the Basic plan',
+          'Thermal paste replacement',
+          'Deep filter cleaning',
+          'Advanced hardware diagnostics',
+          'Software and system optimization',
+          'Tech support via WhatsApp'
+        ]}
+        price="$40.000"
+        highlight={true}
+        ctaLink={waLink('Hola Hmmcode, quiero cotizar/agendar el servicio: Mantenimiento Integral.')}
+        ctaLinkEn={waLink("Hi Hmmcode, I'd like to get a quote/book the service: Full Maintenance.")}
+      />
+
+      <ServiceCard
+        title="Mantenimiento Premium"
+        titleEn="Premium Maintenance"
+        description="Servicio profesional con garantía y mantenimiento periódico"
+        descriptionEn="Professional service with warranty and periodic maintenance"
+        features={[
+          'Todo del plan Integral incluido',
+          'Reparaciones complejas de software',
+          'Optimización avanzada de rendimiento',
+          'Limpieza y desoxidación de circuitos',
+          'Soporte prioritario 24/7'
+        ]}
+        featuresEn={[
+          'Everything from the Full plan',
+          'Complex software repairs',
+          'Advanced performance tuning',
+          'Circuit cleaning and de-oxidation',
+          'Priority support 24/7'
+        ]}
+        price="$50.000"
+        ctaLink={waLink('Hola Hmmcode, quiero cotizar/agendar el servicio: Mantenimiento Premium.')}
+        ctaLinkEn={waLink("Hi Hmmcode, I'd like to get a quote/book the service: Premium Maintenance.")}
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    padding: 4rem 2rem;
+    background: #f9f9f9;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    color: #333;
+  }
+
+  .section-header p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    align-items: stretch;
+  }
+
+  @media (max-width: 1024px) {
+    .services {
+      padding: 3rem 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .services {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.8rem;
+    }
+
+    .section-header p {
+      font-size: 0.95rem;
+    }
+
+    .services-grid {
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .services {
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-header p {
+      font-size: 0.85rem;
+    }
+
+    .services-grid {
+      gap: 1rem;
+    }
+  }
+</style>
