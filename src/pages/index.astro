@@ -55,6 +55,75 @@ import '../styles/global.css';
       data-i18n-es="Somos especialistas en mantenimiento, reparación y optimización de PC, Laptops y Consolas."
       data-i18n-en="We specialize in maintenance, repair and optimization for PCs, laptops and consoles."
     />
+
+    <!-- JSON-LD Schema.org para SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Hmmcode",
+      "image": "https://hmmcode.vercel.app/logo.png",
+      "description": "Especialistas en mantenimiento, reparación y optimización de PC, Laptops y Consolas",
+      "url": "https://hmmcode.vercel.app",
+      "telephone": "+56948645816",
+      "email": "hmmcodecl@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CL",
+        "addressRegion": "RM"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "sameAs": [
+        "https://www.instagram.com/hmmcode",
+        "https://www.facebook.com/hmmcode",
+        "https://www.linkedin.com/company/hmmcode"
+      ],
+      "areaServed": "CL"
+    }
+    </script>
+
+    <!-- JSON-LD Service Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Computer Maintenance and Repair",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Hmmcode"
+      },
+      "areaServed": "CL",
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://hmmcode.vercel.app",
+        "servicePhone": "+56948645816",
+        "serviceEmail": "hmmcodecl@gmail.com"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Hmmcode",
+      "url": "https://hmmcode.vercel.app",
+      "logo": "https://hmmcode.vercel.app/logo.png",
+      "description": "Mantenimiento profesional de PC, laptops y consolas",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "telephone": "+56948645816",
+        "email": "hmmcodecl@gmail.com"
+      }
+    }
+    </script>
   </head>
   <body>
     <Header />
