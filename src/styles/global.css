@@ -231,10 +231,80 @@ textarea {
   }
 }
 
-/* Respetar preferencia de reducción de movimiento */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
+/* Dark Mode Styles */
+html[data-theme="dark"] {
+  background: #0d0d0d;
+}
+
+html[data-theme="dark"] body {
+  background: #0d0d0d;
+  color: #e8e8e8;
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 {
+  color: #f5f5f5;
+}
+
+html[data-theme="dark"] a {
+  color: #64b5f6;
+}
+
+html[data-theme="dark"] a:hover {
+  color: #90caf9;
+}
+
+html[data-theme="dark"] button:not(.control-btn) {
+  background: #1a1a1a;
+  color: #e8e8e8;
+  border-color: #333;
+}
+
+html[data-theme="dark"] button:not(.control-btn):hover {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  background: #1a1a1a;
+  color: #e8e8e8;
+  border: 1px solid #333;
+}
+
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+  color: #888;
+}
+
+html[data-theme="dark"] section {
+  background-color: transparent;
+}
+
+html[data-theme="dark"] .services {
+  background: #0d0d0d !important;
+}
+
+html[data-theme="dark"] .card {
+  background: #1a1a1a;
+  color: #e8e8e8;
+  border-color: #333;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme="dark"] .section-header h2 {
+  color: #f5f5f5;
+}
+
+html[data-theme="dark"] .section-header p {
+  color: #aaa;
+}
+
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;

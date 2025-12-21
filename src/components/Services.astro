@@ -9,8 +9,8 @@ const waLink = (message: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIC
 <section class="services" id="servicios">
   <div class="container">
     <div class="section-header">
-      <h2 data-i18n-es="Nuestros Servicios" data-i18n-en="Our Services">Nuestros Servicios</h2>
-      <p data-i18n-es="Elige el plan que mejor se adapte a tus necesidades" data-i18n-en="Choose the plan that best fits your needs">
+      <h2 data-i18n-es="Nuestros Servicios" data-i18n-en="Our Services" data-i18n-pt="Nossos Serviços">Nuestros Servicios</h2>
+      <p data-i18n-es="Elige el plan que mejor se adapte a tus necesidades" data-i18n-en="Choose the plan that best fits your needs" data-i18n-pt="Escolha o plano que melhor se adequa às suas necessidades">
         Elige el plan que mejor se adapte a tus necesidades
       </p>
     </div>
@@ -19,8 +19,10 @@ const waLink = (message: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIC
       <ServiceCard
         title="Mantenimiento Básico"
         titleEn="Basic Maintenance"
+        titlePt="Manutenção Básica"
         description="Limpieza y mantenimiento preventivo para PC, Laptops y Consolas"
         descriptionEn="Cleaning and preventive maintenance for PCs, laptops and consoles"
+        descriptionPt="Limpeza e manutenção preventiva para PCs, laptops e consoles"
         features={[
           'Limpieza física completa (polvo, ventiladores)',
           'Inspección de componentes internos',
@@ -35,16 +37,19 @@ const waLink = (message: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIC
           'Ports and connectors cleaning',
           'Basic functionality tests'
         ]}
-        price="$25.990"
+        price="$25.990 CLP"
         ctaLink={waLink('Hola Hmmcode, quiero cotizar/agendar el servicio: Mantenimiento Básico.')}
         ctaLinkEn={waLink("Hi Hmmcode, I'd like to get a quote/book the service: Basic Maintenance.")}
+        ctaLinkPt={waLink('Olá Hmmcode, gostaria de um orçamento/agendar o serviço: Manutenção Básica.')}
       />
 
       <ServiceCard
         title="Mantenimiento Integral"
         titleEn="Full Maintenance"
+        titlePt="Manutenção Completa"
         description="Servicio completo de optimización y reparación de hardware"
         descriptionEn="Complete hardware optimization and repair service"
+        descriptionPt="Serviço completo de otimização e reparo de hardware"
         features={[
           'Todo del plan Básico incluido',
           'Cambio de pasta térmica',
@@ -61,17 +66,20 @@ const waLink = (message: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIC
           'Software and system optimization',
           'Tech support via WhatsApp'
         ]}
-        price="$40.000"
+        price="$40.000 CLP"
         highlight={true}
         ctaLink={waLink('Hola Hmmcode, quiero cotizar/agendar el servicio: Mantenimiento Integral.')}
         ctaLinkEn={waLink("Hi Hmmcode, I'd like to get a quote/book the service: Full Maintenance.")}
+        ctaLinkPt={waLink('Olá Hmmcode, gostaria de um orçamento/agendar o serviço: Manutenção Completa.')}
       />
 
       <ServiceCard
         title="Mantenimiento Premium"
         titleEn="Premium Maintenance"
+        titlePt="Manutenção Premium"
         description="Servicio profesional con garantía y mantenimiento periódico"
         descriptionEn="Professional service with warranty and periodic maintenance"
+        descriptionPt="Serviço profissional com garantia e manutenção periódica"
         features={[
           'Todo del plan Integral incluido',
           'Reparaciones complejas de software',
@@ -86,9 +94,10 @@ const waLink = (message: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIC
           'Circuit cleaning and de-oxidation',
           'Priority support 24/7'
         ]}
-        price="$50.000"
+        price="$50.000 CLP"
         ctaLink={waLink('Hola Hmmcode, quiero cotizar/agendar el servicio: Mantenimiento Premium.')}
         ctaLinkEn={waLink("Hi Hmmcode, I'd like to get a quote/book the service: Premium Maintenance.")}
+        ctaLinkPt={waLink('Olá Hmmcode, gostaria de um orçamento/agendar o serviço: Manutenção Premium.')}
       />
     </div>
   </div>

@@ -2,45 +2,65 @@
 interface Props {
   title: string;
   titleEn?: string;
+  titlePt?: string;
   description: string;
   descriptionEn?: string;
+  descriptionPt?: string;
   features: string[];
   featuresEn?: string[];
+  featuresPt?: string[];
   price: string;
   priceEn?: string;
+  pricePt?: string;
   highlight?: boolean;
   badgeText?: string;
   badgeTextEn?: string;
+  badgeTextPt?: string;
   ctaText?: string;
   ctaTextEn?: string;
+  ctaTextPt?: string;
   ctaLink?: string;
   ctaLinkEn?: string;
+  ctaLinkPt?: string;
 }
 
 const {
   title,
   titleEn,
+  titlePt,
   description,
   descriptionEn,
+  descriptionPt,
   features,
   featuresEn,
+  featuresPt,
   price,
   priceEn,
+  pricePt,
   highlight = false,
   badgeText = 'Más vendido',
   badgeTextEn = 'Best seller',
+  badgeTextPt = 'Mais vendido',
   ctaText = 'Solicitar Información',
   ctaTextEn = 'Request info',
+  ctaTextPt = 'Solicitar informação',
   ctaLink,
   ctaLinkEn,
+  ctaLinkPt,
 } = Astro.props;
 
 const featuresEnFinal = Array.isArray(featuresEn) ? featuresEn : features;
+const featuresPtFinal = Array.isArray(featuresPt) ? featuresPt : featuresEn ?? features;
 const titleEnFinal = titleEn ?? title;
+const titlePtFinal = titlePt ?? titleEn ?? title;
 const descriptionEnFinal = descriptionEn ?? description;
+const descriptionPtFinal = descriptionPt ?? descriptionEn ?? description;
 const priceEnFinal = priceEn ?? price;
+const pricePtFinal = pricePt ?? priceEn ?? price;
 const badgeTextEnFinal = badgeTextEn ?? badgeText;
+const badgeTextPtFinal = badgeTextPt ?? badgeTextEnFinal;
 const ctaTextEnFinal = ctaTextEn ?? ctaText;
+const ctaTextPtFinal = ctaTextPt ?? ctaTextEnFinal;
 
 const isExternalLink = typeof ctaLink === 'string' && /^https?:\/\//.test(ctaLink);
 const isExternalLinkEn = typeof ctaLinkEn === 'string' && /^https?:\/\//.test(ctaLinkEn);
@@ -49,20 +69,20 @@ const isExternal = isExternalLink || isExternalLinkEn;
 
 <div class={`card ${highlight ? 'highlight' : ''}`}>
   {highlight && (
-    <div class="badge" data-i18n-es={badgeText} data-i18n-en={badgeTextEnFinal}>
+    <div class="badge" data-i18n-es={badgeText} data-i18n-en={badgeTextEnFinal} data-i18n-pt={badgeTextPtFinal}>
       {badgeText}
     </div>
   )}
   <div class="card-header">
-    <h3 data-i18n-es={title} data-i18n-en={titleEnFinal}>{title}</h3>
-    <div class="price" data-i18n-es={price} data-i18n-en={priceEnFinal}>{price}</div>
+    <h3 data-i18n-es={title} data-i18n-en={titleEnFinal} data-i18n-pt={titlePtFinal}>{title}</h3>
+    <div class="price" data-i18n-es={price} data-i18n-en={priceEnFinal} data-i18n-pt={pricePtFinal}>{price}</div>
   </div>
-  <p class="description" data-i18n-es={description} data-i18n-en={descriptionEnFinal}>{description}</p>
+  <p class="description" data-i18n-es={description} data-i18n-en={descriptionEnFinal} data-i18n-pt={descriptionPtFinal}>{description}</p>
   <ul class="features">
     {features.map((feature, index) => (
       <li>
         <span class="checkmark">✓</span>
-        <span class="feature-text" data-i18n-es={feature} data-i18n-en={featuresEnFinal[index] ?? feature}>
+        <span class="feature-text" data-i18n-es={feature} data-i18n-en={featuresEnFinal[index] ?? feature} data-i18n-pt={featuresPtFinal[index] ?? featuresEnFinal[index] ?? feature}>
           {feature}
         </span>
       </li>
@@ -72,18 +92,16 @@ const isExternal = isExternalLink || isExternalLinkEn;
     <a
       class="contact-btn"
       href={ctaLink}
-      data-i18n-attr="href"
-      data-i18n-es={ctaLink}
-      data-i18n-en={ctaLinkEn ?? ctaLink}
+      data-cta-link-es={ctaLink}
+      data-cta-link-en={ctaLinkEn ?? ctaLink}
+      data-cta-link-pt={ctaLinkPt ?? ctaLinkEn ?? ctaLink}
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
-      data-i18n-es={ctaText}
-      data-i18n-en={ctaTextEnFinal}
     >
-      {ctaText}
+      <span data-i18n-es={ctaText} data-i18n-en={ctaTextEnFinal} data-i18n-pt={ctaTextPtFinal}>{ctaText}</span>
     </a>
   ) : (
-    <button class="contact-btn" type="button" data-i18n-es={ctaText} data-i18n-en={ctaTextEnFinal}>{ctaText}</button>
+    <button class="contact-btn" type="button" data-i18n-es={ctaText} data-i18n-en={ctaTextEnFinal} data-i18n-pt={ctaTextPtFinal}>{ctaText}</button>
   )}
 </div>
 

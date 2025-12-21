@@ -7,48 +7,63 @@
 interface Props {
   title?: string;
   titleEn?: string;
+  titlePt?: string;
   subtitle?: string;
   subtitleEn?: string;
+  subtitlePt?: string;
   showUrgency?: boolean;
   urgencyText?: string;
   urgencyTextEn?: string;
+  urgencyTextPt?: string;
   ctaText?: string;
   ctaTextEn?: string;
+  ctaTextPt?: string;
   ctaLink?: string;
   ctaLinkEn?: string;
+  ctaLinkPt?: string;
 }
 
 const {
   title = '⚡ Agenda tu servicio hoy',
   titleEn,
+  titlePt,
   subtitle = 'Atención rápida para PC, laptops y consolas',
   subtitleEn,
+  subtitlePt,
   showUrgency = true,
   urgencyText = 'Respuesta en menos de 24 horas',
   urgencyTextEn,
+  urgencyTextPt,
   ctaText = 'Agendar Ahora',
   ctaTextEn,
+  ctaTextPt,
   ctaLink = '/servicio-formateo',
   ctaLinkEn,
+  ctaLinkPt,
 } = Astro.props;
 
 const titleEnFinal = titleEn ?? '⚡ Book your service today';
+const titlePtFinal = titlePt ?? titleEn ?? '\u26a1 Agende seu serviço hoje';
 const subtitleEnFinal = subtitleEn ?? 'Fast support for PCs, laptops and consoles';
+const subtitlePtFinal = subtitlePt ?? subtitleEn ?? 'Suporte rápido para PCs, laptops e consoles';
 const urgencyTextEnFinal = urgencyTextEn ?? 'Reply in under 24 hours';
+const urgencyTextPtFinal = urgencyTextPt ?? urgencyTextEn ?? 'Resposta em menos de 24 horas';
 const ctaTextEnFinal = ctaTextEn ?? 'Book now';
+const ctaTextPtFinal = ctaTextPt ?? ctaTextEnFinal ?? 'Agendar agora';
 const ctaLinkEnFinal = ctaLinkEn ?? ctaLink;
+const ctaLinkPtFinal = ctaLinkPt ?? ctaLinkEnFinal ?? ctaLink;
 ---
 
 <section class="cro-banner">
   <div class="container">
     <div class="content">
-      <h2 class="title" data-i18n-es={title} data-i18n-en={titleEnFinal}>{title}</h2>
-      <p class="subtitle" data-i18n-es={subtitle} data-i18n-en={subtitleEnFinal}>{subtitle}</p>
+      <h2 class="title" data-i18n-es={title} data-i18n-en={titleEnFinal} data-i18n-pt={titlePtFinal}>{title}</h2>
+      <p class="subtitle" data-i18n-es={subtitle} data-i18n-en={subtitleEnFinal} data-i18n-pt={subtitlePtFinal}>{subtitle}</p>
       
       {showUrgency && (
         <div class="urgency-badge">
           <span class="pulse"></span>
-          <span data-i18n-es={urgencyText} data-i18n-en={urgencyTextEnFinal}>{urgencyText}</span>
+          <span data-i18n-es={urgencyText} data-i18n-en={urgencyTextEnFinal} data-i18n-pt={urgencyTextPtFinal}>{urgencyText}</span>
         </div>
       )}
 
@@ -56,11 +71,11 @@ const ctaLinkEnFinal = ctaLinkEn ?? ctaLink;
         <a
           href={ctaLink}
           class="cta-button primary"
-          data-i18n-attr="href"
-          data-i18n-es={ctaLink}
-          data-i18n-en={ctaLinkEnFinal}
+          data-cta-link-es={ctaLink}
+          data-cta-link-en={ctaLinkEnFinal}
+          data-cta-link-pt={ctaLinkPtFinal}
         >
-          <span data-i18n-es={ctaText} data-i18n-en={ctaTextEnFinal}>{ctaText}</span> →
+          <span data-i18n-es={ctaText} data-i18n-en={ctaTextEnFinal} data-i18n-pt={ctaTextPtFinal}>{ctaText}</span> →
         </a>
         <p
           class="trust-text"

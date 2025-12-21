@@ -29,20 +29,13 @@ const whatsappUrlEn = `https://wa.me/${phoneNumber.replace(/\D/g, '')}?text=${en
 <div class={`whatsapp-button ${position}`}>
   <a 
     href={whatsappUrl}
-    data-i18n-attr="href"
-    data-i18n-es={whatsappUrl}
-    data-i18n-en={whatsappUrlEn}
+    data-cta-link-es={whatsappUrl}
+    data-cta-link-en={whatsappUrlEn}
     target="_blank"
     rel="noopener noreferrer"
     class="whatsapp-link"
     title="Contactar por WhatsApp"
-    data-i18n-attr="title"
-    data-i18n-es="Contactar por WhatsApp"
-    data-i18n-en="Contact on WhatsApp"
     aria-label="Abrir WhatsApp"
-    data-i18n-attr="aria-label"
-    data-i18n-es="Abrir WhatsApp"
-    data-i18n-en="Open WhatsApp"
   >
     <svg 
       class="whatsapp-icon"

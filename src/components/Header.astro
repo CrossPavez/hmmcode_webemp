@@ -4,8 +4,8 @@
 <header class="header">
   <div class="container">
     <div class="header-content">
-      <a class="brand" href="/" aria-label="Hmmcode">
-        <span class="brand-name">Hmmcode</span>
+      <a class="brand" href="/" aria-label="HMMCODE">
+        <span class="brand-name">HMMCODE</span>
       </a>
 
       <nav
@@ -30,11 +30,12 @@
         data-i18n-attr="aria-label"
         data-i18n-es="Preferencias"
         data-i18n-en="Preferences"
+        data-i18n-pt="Preferências"
       >
-        <button class="control-btn control-btn--contrast" type="button" id="contrastToggle" aria-pressed="false" data-i18n="contrast">
-          Contraste
+        <button class="control-btn control-btn--dark" type="button" id="darkToggle" aria-pressed="false" title="Modo oscuro">
+          🌙
         </button>
-        <button class="control-btn control-btn--lang" type="button" id="langToggle" aria-label="Cambiar idioma" data-lang="es">
+        <button class="control-btn control-btn--lang" type="button" id="langToggle" aria-label="Cambiar idioma" data-lang="es" title="Idioma">
           ES
         </button>
       </div>
@@ -44,7 +45,7 @@
 
 <script is:inline>
   const STORAGE_LANG_KEY = 'hmm_lang';
-  const STORAGE_CONTRAST_KEY = 'hmm_contrast';
+  const STORAGE_DARK_KEY = 'hmm_dark';
 
   const i18n = {
     es: {
@@ -65,16 +66,35 @@
       contrast: 'Contrast',
       langAria: 'Change language',
     },
+    pt: {
+      home: 'Início',
+      services: 'Serviços',
+      format: 'Formatação',
+      portfolio: 'Portfólio',
+      contact: 'Contato',
+      contrast: 'Contraste',
+      langAria: 'Mudar idioma',
+    },
   };
 
   function translateInlineElements(lang) {
-    const isEnglish = (lang || 'es').toLowerCase().startsWith('en');
-    const selector = '[data-i18n-es],[data-i18n-en]';
+    const selector = '[data-i18n-es],[data-i18n-en],[data-i18n-pt]';
 
     document.querySelectorAll(selector)?.forEach((el) => {
       const valueEs = el.getAttribute('data-i18n-es');
       const valueEn = el.getAttribute('data-i18n-en');
-      const nextValue = (isEnglish ? valueEn : valueEs) ?? valueEs ?? valueEn;
+      const valuePt = el.getAttribute('data-i18n-pt');
+      
+      let nextValue;
+      if (lang === 'pt') {
+        // Si es portugués, usar PT si existe, si no usar EN como fallback
+        nextValue = valuePt ?? valueEn ?? valueEs;
+      } else if (lang === 'en') {
+        nextValue = valueEn ?? valueEs ?? valuePt;
+      } else {
+        nextValue = valueEs ?? valueEn ?? valuePt;
+      }
+      
       if (!nextValue) return;
 
       const targetAttr = el.getAttribute('data-i18n-attr');
@@ -101,11 +121,26 @@
       if (key && dict[key]) el.textContent = dict[key];
     });
 
+    // Actualizar href de botones de las cards (soportar 3 idiomas)
+    document.querySelectorAll('[data-cta-link-es][data-cta-link-en]')?.forEach((el) => {
+      let href;
+      if (lang === 'pt') {
+        // Para portugués, usar PT si existe, si no EN como fallback
+        href = el.hasAttribute('data-cta-link-pt') ? el.getAttribute('data-cta-link-pt') : el.getAttribute('data-cta-link-en');
+      } else if (lang === 'en') {
+        href = el.getAttribute('data-cta-link-en');
+      } else {
+        href = el.getAttribute('data-cta-link-es');
+      }
+      if (href) el.setAttribute('href', href);
+    });
+
     translateInlineElements(lang);
 
     const langBtn = document.getElementById('langToggle');
     if (langBtn) {
-      langBtn.textContent = (lang || 'es').toUpperCase();
+      const langDisplay = lang === 'pt' ? 'PT' : lang.toUpperCase();
+      langBtn.textContent = langDisplay;
       langBtn.setAttribute('aria-label', dict.langAria);
       langBtn.setAttribute('data-lang', lang);
     }
@@ -117,36 +152,36 @@
     }
   }
 
-  function applyContrast(isHigh) {
-    if (isHigh) {
-      document.documentElement.dataset.contrast = 'high';
+  function applyDarkMode(isDark) {
+    if (isDark) {
+      document.documentElement.dataset.theme = 'dark';
     } else {
-      delete document.documentElement.dataset.contrast;
+      delete document.documentElement.dataset.theme;
     }
-    const btn = document.getElementById('contrastToggle');
-    if (btn) btn.setAttribute('aria-pressed', String(Boolean(isHigh)));
+    const btn = document.getElementById('darkToggle');
+    if (btn) btn.setAttribute('aria-pressed', String(Boolean(isDark)));
   }
 
   function initNavbarPrefs() {
     const savedLang = localStorage.getItem(STORAGE_LANG_KEY) || 'es';
-    const savedContrast = localStorage.getItem(STORAGE_CONTRAST_KEY) === 'high';
+    const savedDark = localStorage.getItem(STORAGE_DARK_KEY) === 'true';
 
     applyLanguage(savedLang);
-    applyContrast(savedContrast);
+    applyDarkMode(savedDark);
 
-    const contrastBtn = document.getElementById('contrastToggle');
+    const darkBtn = document.getElementById('darkToggle');
     const langBtn = document.getElementById('langToggle');
 
-    contrastBtn?.addEventListener('click', () => {
-      const isHigh = document.documentElement.dataset.contrast === 'high';
-      const next = !isHigh;
-      applyContrast(next);
-      localStorage.setItem(STORAGE_CONTRAST_KEY, next ? 'high' : 'normal');
+    darkBtn?.addEventListener('click', () => {
+      const isDark = document.documentElement.dataset.theme === 'dark';
+      const next = !isDark;
+      applyDarkMode(next);
+      localStorage.setItem(STORAGE_DARK_KEY, String(next));
     });
 
     langBtn?.addEventListener('click', () => {
       const current = (localStorage.getItem(STORAGE_LANG_KEY) || 'es').toLowerCase();
-      const next = current === 'es' ? 'en' : 'es';
+      const next = current === 'es' ? 'en' : current === 'en' ? 'pt' : 'es';
       localStorage.setItem(STORAGE_LANG_KEY, next);
       applyLanguage(next);
     });
@@ -445,4 +480,30 @@
       gap: 0.8rem;
     }
   }
+
+  /* Dark Mode Styles */
+  :global(html[data-theme="dark"]) .header {
+    background: rgba(20, 20, 25, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+  }
+
+  :global(html[data-theme="dark"]) .header::after {
+    background: linear-gradient(90deg, transparent 0%, rgba(var(--brand-600-rgb), 0.4) 50%, transparent 100%);
+  }
+
+  :global(html[data-theme="dark"]) .nav a {
+    color: #e8e8e8;
+  }
+
+  :global(html[data-theme="dark"]) .control-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  :global(html[data-theme="dark"]) .control-btn:hover {
+    background: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
 </style>
+
+
