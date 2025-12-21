@@ -1,4 +1,8 @@
 ---
+// 🔐 VARIABLES DE ENTORNO SEGURAS
+const FORMSPREE_ID = import.meta.env.PUBLIC_FORMSPREE_ID || 'mgvgqdap';
+const FORMSPREE_ENDPOINT = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || 'https://formspree.io/f/';
+const formAction = `${FORMSPREE_ENDPOINT}${FORMSPREE_ID}`;
 ---
 
 <section class="contact" id="contacto">
@@ -30,7 +34,7 @@
         </div>
       </div>
 
-      <form class="contact-form" id="contactFormSimple" action="https://formspree.io/f/mgvgqdap" method="POST" novalidate>
+      <form class="contact-form" id="contactFormSimple" action={formAction} method="POST" novalidate>
         <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <div class="form-group">
           <label for="nombre" data-i18n-es="Nombre" data-i18n-en="Name">Nombre</label>
@@ -85,6 +89,10 @@
     return l.startsWith('en') ? 'en' : l.startsWith('pt') ? 'pt' : 'es';
   }
 
+  // 🔐 RATE LIMITING: Prevenir spam (1 envío por 5 segundos)
+  let lastFormSubmitTime = 0;
+  const RATE_LIMIT_MS = 5000;
+
   function t(es, en, pt) {
     const lang = currentLang();
     return lang === 'en' ? en : lang === 'pt' ? (pt || en) : es;
@@ -96,6 +104,14 @@
   }
 
   form?.addEventListener('submit', async (e) => {
+    // 🔐 Validar rate limit
+    const now = Date.now();
+    if (now - lastFormSubmitTime < RATE_LIMIT_MS) {
+      e.preventDefault();
+      return setStatus(t('Por favor espera unos segundos antes de enviar otro formulario.', 'Please wait a few seconds before sending another form.', 'Por favor aguarde alguns segundos antes de enviar outro formulário.'));
+    }
+    lastFormSubmitTime = now;
+
     // Formspree maneja el envío automáticamente con POST
     // Solo validación básica aquí
     const fd = new FormData(form);
