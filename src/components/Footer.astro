@@ -143,7 +143,7 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .footer {
       padding: 2rem 1.5rem;
     }
@@ -178,7 +178,7 @@
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 479px) {
     .footer {
       padding: 1.5rem 1rem;
     }
@@ -210,6 +210,42 @@
     .footer-bottom {
       padding-top: 1rem;
       font-size: 0.75rem;
+    }
+  }
+
+  /* iPhone 13/14/15 portrait (390px) */
+  @media (max-width: 389px) {
+    .footer-section h4 {
+      font-size: 0.8rem;
+    }
+
+    .footer-section p {
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Ultra pequeño: 360px y menos */
+  @media (max-width: 359px) {
+    .footer {
+      padding: 1.2rem 0.75rem;
+    }
+
+    .footer-content {
+      gap: 1rem;
+    }
+
+    .footer-section h4 {
+      font-size: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section ul li {
+      font-size: 0.7rem;
+    }
+
+    .footer-bottom {
+      font-size: 0.7rem;
+      padding-top: 0.75rem;
     }
   }
 </style>

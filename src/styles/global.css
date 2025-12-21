@@ -4,6 +4,26 @@
   box-sizing: border-box;
 }
 
+/*
+ * RESPONSIVE BREAKPOINTS - Optimizados para dispositivos modernos
+ * Mobile First Approach (min-width recommended for mobile-first)
+ * 
+ * XS: 360px - Samsung Galaxy S24, iPhone SE (landscape)
+ * SM: 390px - iPhone 13, 14, 15 (portrait)
+ * MD: 480px - Tablets pequeños, Android phones grandes (portrait)
+ * LG: 768px - iPad Mini, tablets (portrait)
+ * XL: 1024px - iPad Pro, tablets (landscape)
+ * 2XL: 1280px - Desktop estándar
+ * 3XL: 1536px - Monitores grandes
+ * 
+ * @media (max-width: 359px) - Ultra pequeño
+ * @media (max-width: 389px) - XS (360px)
+ * @media (max-width: 479px) - SM-MD (390px-479px)
+ * @media (max-width: 767px) - MD (480px-767px)
+ * @media (max-width: 1023px) - LG (768px-1023px)
+ * @media (max-width: 1279px) - XL (1024px-1279px)
+ */
+
 :root {
   /* Theme: Green (inspirado en referencia) */
   --brand-600: #1f7a4c;

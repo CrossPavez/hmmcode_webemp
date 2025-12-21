@@ -112,7 +112,7 @@
     background: rgba(255, 255, 255, 0.1);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .hero {
       padding: 3.5rem 2rem;
     }
@@ -137,7 +137,7 @@
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 479px) {
     .hero {
       padding: 2.5rem 1rem;
     }
@@ -173,7 +173,20 @@
     }
   }
 
-  @media (max-width: 360px) {
+  /* iPhone 13/14/15 portrait (390px) */
+  @media (max-width: 389px) {
+    .hero-content h2 {
+      font-size: 1.3rem;
+    }
+
+    .cta-button {
+      padding: 0.75rem 1.2rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  /* Ultra pequeño: 360px y menos */
+  @media (max-width: 359px) {
     .hero {
       padding: 2rem 0.75rem;
     }

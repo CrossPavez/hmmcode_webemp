@@ -346,7 +346,8 @@
     .nav ul { gap: 1.1rem; }
   }
 
-  @media (max-width: 768px) {
+  /* iPad Mini / Tablets pequeños */
+  @media (max-width: 767px) {
     .header {
       padding: 0.8rem 0;
     }
@@ -407,7 +408,8 @@
     }
   }
 
-  @media (max-width: 480px) {
+  /* Samsung Galaxy S24, Android phones modernos */
+  @media (max-width: 479px) {
     .header {
       padding: 0.75rem 0;
     }
@@ -455,7 +457,24 @@
     }
   }
 
-  @media (max-width: 360px) {
+  /* iPhone 13/14/15 portrait (390px) */
+  @media (max-width: 389px) {
+    .nav ul {
+      gap: 0.7rem;
+    }
+
+    .nav a {
+      font-size: 0.77rem;
+      padding: 10px 5px;
+    }
+
+    .control-btn {
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Ultra pequeño: 360px y menos */
+  @media (max-width: 359px) {
     .nav ul {
       gap: 0.6rem;
     }
