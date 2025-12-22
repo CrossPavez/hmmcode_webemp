@@ -93,6 +93,15 @@ const formAction = `${FORMSPREE_ENDPOINT}${FORMSPREE_ID}`;
   let lastFormSubmitTime = 0;
   const RATE_LIMIT_MS = 5000;
 
+  // 🔐 SPAM DETECTION: Palabras clave de spam
+  const SPAM_WORDS = /viagra|casino|poker|crypto|bitcoin|forex|lottery|prize|winner|claim|click here|buy now|free money|make money|work from home|nigerian|prince|click.here|bit\.ly|tinyurl/gi;
+  
+  // 🔐 EMAIL VALIDATION: RFC 5322 simplified
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  // 🔐 CHILEAN PHONE: +56 9 XXXX XXXX or 9 XXXX XXXX
+  const PHONE_REGEX = /^(\+?56)?[\s]?9[\s]?\d{4}[\s]?\d{4}$/;
+
   function t(es, en, pt) {
     const lang = currentLang();
     return lang === 'en' ? en : lang === 'pt' ? (pt || en) : es;
@@ -101,6 +110,23 @@ const formAction = `${FORMSPREE_ENDPOINT}${FORMSPREE_ID}`;
   function setStatus(text) {
     if (!status) return;
     status.textContent = text;
+  }
+
+  // 🔐 HELPER: Detectar spam
+  function hasSpamPatterns(text) {
+    return SPAM_WORDS.test(text);
+  }
+
+  // 🔐 HELPER: Detectar enlaces sospechosos
+  function hasSuspiciousLinks(text) {
+    return /https?:\/\/|www\.|bit\.ly|tinyurl|short\.link|goo\.gl/.test(text);
+  }
+
+  // 🔐 HELPER: Detectar múltiples URLs
+  function countUrls(text) {
+    const urlPattern = /https?:\/\/|www\./g;
+    const matches = text.match(urlPattern);
+    return matches ? matches.length : 0;
   }
 
   form?.addEventListener('submit', async (e) => {
@@ -125,17 +151,72 @@ const formAction = `${FORMSPREE_ENDPOINT}${FORMSPREE_ID}`;
     const email = String(fd.get('email') || '').trim();
     const mensaje = String(fd.get('mensaje') || '').trim();
 
+    // 🔐 VALIDACIÓN: Nombre
     if (!nombre || nombre.length < 2) {
       e.preventDefault();
       return setStatus(t('Por favor ingresa tu nombre.', 'Please enter your name.', 'Por favor insira seu nome.'));
     }
+    if (nombre.length > 100) {
+      e.preventDefault();
+      return setStatus(t('Nombre muy largo.', 'Name too long.', 'Nome muito longo.'));
+    }
+
+    // 🔐 VALIDACIÓN: Email RFC 5322
     if (!email) {
       e.preventDefault();
       return setStatus(t('Por favor ingresa tu email.', 'Please enter your email.', 'Por favor insira seu email.'));
     }
+    if (!EMAIL_REGEX.test(email)) {
+      e.preventDefault();
+      return setStatus(t('Email inválido.', 'Invalid email.', 'Email inválido.'));
+    }
+    if (email.length > 254) {
+      e.preventDefault();
+      return setStatus(t('Email muy largo.', 'Email too long.', 'Email muito longo.'));
+    }
+
+    // 🔐 VALIDACIÓN: Mensaje
     if (!mensaje || mensaje.length < 10) {
       e.preventDefault();
       return setStatus(t('Cuéntanos un poco más (mínimo 10 caracteres).', 'Please write a bit more (min 10 characters).', 'Conte-nos mais um pouco (mínimo 10 caracteres).'));
+    }
+    if (mensaje.length > 5000) {
+      e.preventDefault();
+      return setStatus(t('Mensaje muy largo.', 'Message too long.', 'Mensagem muito longa.'));
+    }
+
+    // 🔐 SPAM DETECTION: Detectar palabras de spam
+    if (hasSpamPatterns(nombre) || hasSpamPatterns(mensaje)) {
+      e.preventDefault();
+      return setStatus(t('Mensaje sospechoso detectado. Por favor revisa.', 'Suspicious message detected. Please review.', 'Mensagem suspeita detectada.'));
+    }
+
+    // 🔐 SPAM DETECTION: Detectar múltiples URLs
+    const urlCount = countUrls(mensaje);
+    if (urlCount > 2) {
+      e.preventDefault();
+      return setStatus(t('Demasiados enlaces en el mensaje.', 'Too many links in message.', 'Muitos links na mensagem.'));
+    }
+
+    // 🔐 SPAM DETECTION: Detectar URLs sospechosas (acortadores)
+    if (hasSuspiciousLinks(mensaje)) {
+      e.preventDefault();
+      return setStatus(t('Enlaces acortados no permitidos.', 'Shortened links not allowed.', 'Links encurtados não permitidos.'));
+    }
+
+    // 🔐 SPAM DETECTION: Detectar repetición excesiva
+    const wordArray = mensaje.split(/\s+/);
+    if (wordArray.length > 0) {
+      const wordFreq = {};
+      wordArray.forEach(word => {
+        const clean = word.toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (clean.length > 3) wordFreq[clean] = (wordFreq[clean] || 0) + 1;
+      });
+      const maxFreq = Math.max(...Object.values(wordFreq));
+      if (maxFreq > 10) {
+        e.preventDefault();
+        return setStatus(t('Mensaje parece repetitivo.', 'Message seems repetitive.', 'Mensagem parece repetitiva.'));
+      }
     }
 
     // Formspree enviará el formulario automáticamente
