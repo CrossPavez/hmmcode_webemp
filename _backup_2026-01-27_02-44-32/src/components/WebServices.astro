@@ -1,0 +1,240 @@
+---
+import ServiceCard from './ServiceCard.astro';
+
+const WHATSAPP = '56948645816';
+---
+
+<section class="web-services" id="web">
+  <div class="container">
+    <div class="section-header">
+      <h2 data-i18n-es="Páginas Web" data-i18n-en="Websites">Páginas Web</h2>
+      <p data-i18n-es="Diseño y desarrollo a medida. Se cotiza según alcance." data-i18n-en="Custom design and development. Quoted based on scope.">
+        Diseño y desarrollo a medida. Se cotiza según alcance.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <ServiceCard
+        title="Landing de Ventas"
+        titleEn="Sales Landing Page"
+        description="Ideal para captar clientes por WhatsApp y mostrar tus servicios de forma profesional."
+        descriptionEn="Ideal to capture leads via WhatsApp and present your services professionally."
+        features={[
+          '1 página enfocada en conversiones',
+          'Botón WhatsApp + formulario',
+          'SEO básico + velocidad',
+          'Entrega estimada: 3–5 días',
+        ]}
+        featuresEn={[
+          '1 page focused on conversions',
+          'WhatsApp button + form',
+          'Basic SEO + performance',
+          'Estimated delivery: 3–5 days',
+        ]}
+        price="Cotización"
+        priceEn="Quote"
+        ctaText="Cotizar Landing"
+        ctaTextEn="Quote Landing"
+        ctaLink={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola Hmmcode, quiero cotizar una Landing de ventas. Mi rubro es: ___, necesito secciones: ___, y tengo logo/textos: sí/no.')}`}
+        ctaLinkEn={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hi Hmmcode, I'd like a quote for a sales landing page. My industry is: ___, I need sections: ___, and I have logo/copy: yes/no.")}`}
+      />
+
+      <ServiceCard
+        title="Web Pro (Corporativa)"
+        titleEn="Pro Website (Corporate)"
+        description="Para marcas que necesitan presencia seria, páginas internas y una base sólida para crecer."
+        descriptionEn="For brands that need a serious presence, internal pages and a solid base to grow."
+        features={[
+          '4–6 secciones / páginas',
+          'Diseño responsive + contenido ordenado',
+          'SEO on-page + estructura clara',
+          'Entrega estimada: 1–2 semanas',
+        ]}
+        featuresEn={[
+          '4–6 sections / pages',
+          'Responsive design + structured content',
+          'On-page SEO + clear structure',
+          'Estimated delivery: 1–2 weeks',
+        ]}
+        price="Cotización"
+        priceEn="Quote"
+        highlight={true}
+        badgeText="Recomendado"
+        badgeTextEn="Recommended"
+        ctaText="Cotizar Web Pro"
+        ctaTextEn="Quote Pro Website"
+        ctaLink={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola Hmmcode, quiero cotizar una Web Pro (corporativa). Mi rubro es: ___, secciones/páginas: ___, y necesito: WhatsApp/SEO/portafolio (sí/no).')}`}
+        ctaLinkEn={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hi Hmmcode, I'd like a quote for a Pro (corporate) website. My industry is: ___, sections/pages: ___, and I need: WhatsApp/SEO/portfolio (yes/no).")}`}
+      />
+
+      <ServiceCard
+        title="Catálogo / Reservas"
+        titleEn="Catalog / Bookings"
+        description="Para negocios que requieren mostrar catálogo, servicios o gestionar solicitudes con mayor detalle."
+        descriptionEn="For businesses that need a catalog, services listing or more detailed requests management."
+        features={[
+          'Catálogo de servicios/productos',
+          'Formularios avanzados + WhatsApp',
+          'Integraciones básicas (Maps, redes)',
+          'Entrega estimada: 2–4 semanas',
+        ]}
+        featuresEn={[
+          'Services/products catalog',
+          'Advanced forms + WhatsApp',
+          'Basic integrations (Maps, socials)',
+          'Estimated delivery: 2–4 weeks',
+        ]}
+        price="Cotización"
+        priceEn="Quote"
+        ctaText="Cotizar Catálogo"
+        ctaTextEn="Quote Catalog"
+        ctaLink={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola Hmmcode, quiero cotizar una web con catálogo o reservas. Mi rubro es: ___, cantidad de items/servicios: ___, y necesito integraciones: ___.')}`}
+        ctaLinkEn={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hi Hmmcode, I'd like a quote for a website with catalog or bookings. My industry is: ___, number of items/services: ___, and I need integrations: ___.")}`}
+      />
+    </div>
+
+    <div class="quote-note">
+      <h3 data-i18n-es="¿Qué necesito para cotizar rápido?" data-i18n-en="What do I need for a quick quote?">¿Qué necesito para cotizar rápido?</h3>
+      <ul>
+        <li data-i18n-es="Rubro y ciudad" data-i18n-en="Industry and city">Rubro y ciudad</li>
+        <li data-i18n-es="Ejemplo de web que te guste (1–2 links)" data-i18n-en="Example website you like (1–2 links)">Ejemplo de web que te guste (1–2 links)</li>
+        <li data-i18n-es="Secciones/páginas necesarias" data-i18n-en="Required sections/pages">Secciones/páginas necesarias</li>
+        <li data-i18n-es="Si tienes logo y textos (o necesitas ayuda)" data-i18n-en="If you have logo and copy (or need help)">Si tienes logo y textos (o necesitas ayuda)</li>
+        <li data-i18n-es="Objetivo principal: WhatsApp / formulario / ventas" data-i18n-en="Main goal: WhatsApp / form / sales">Objetivo principal: WhatsApp / formulario / ventas</li>
+      </ul>
+      <a
+        class="quote-cta"
+        href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola Hmmcode, quiero cotizar una página web. Rubro: ___, ciudad: ___, objetivo: ___, secciones: ___, tengo logo/textos: sí/no. Links de referencia: ___.')}`}
+        data-cta-link-es={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola Hmmcode, quiero cotizar una página web. Rubro: ___, ciudad: ___, objetivo: ___, secciones: ___, tengo logo/textos: sí/no. Links de referencia: ___.')}`}
+        data-cta-link-en={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Hi Hmmcode, I'd like a quote for a website. Industry: ___, city: ___, goal: ___, sections: ___, do I have logo/copy: yes/no. Reference links: ___.")}`}
+        data-cta-link-pt={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Olá Hmmcode, gostaria de um orçamento para um site. Indústria: ___, cidade: ___, objetivo: ___, seções: ___, tenho logo/cópia: sim/não. Links de referência: ___.')}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span data-i18n-es="Cotizar por WhatsApp" data-i18n-en="Get a Quote on WhatsApp" data-i18n-pt="Obter Orçamento no WhatsApp">Cotizar por WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .web-services {
+    padding: 4rem 2rem;
+    background: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    color: #333;
+  }
+
+  .section-header p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    align-items: stretch;
+    margin-bottom: 2.5rem;
+  }
+
+  .quote-note {
+    background: linear-gradient(
+      135deg,
+      rgba(var(--brand-600-rgb), 0.10) 0%,
+      rgba(var(--brand-800-rgb), 0.10) 100%
+    );
+    border-left: 4px solid var(--brand-600);
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .quote-note h3 {
+    margin: 0 0 1rem 0;
+    color: #333;
+    font-size: 1.25rem;
+  }
+
+  .quote-note ul {
+    margin: 0 0 1.5rem 1rem;
+    color: #333;
+    line-height: 1.7;
+  }
+
+  .quote-cta {
+    display: inline-flex;
+    padding: 0.85rem 1.6rem;
+    background: linear-gradient(135deg, var(--brand-gradient-start) 0%, var(--brand-gradient-end) 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 1024px) {
+    .web-services {
+      padding: 3rem 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .web-services {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.8rem;
+    }
+
+    .section-header p {
+      font-size: 0.95rem;
+    }
+
+    .services-grid {
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+
+    .quote-note {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .web-services {
+      padding: 2rem 1rem;
+    }
+
+    .quote-note {
+      padding: 1.25rem;
+    }
+  }
+</style>

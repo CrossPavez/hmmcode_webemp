@@ -1,0 +1,82 @@
+/* 
+ * RESPONSIVE BREAKPOINTS - Optimizados para dispositivos modernos 2024-2025
+ * Mobile-First Approach: Usar @media (min-width: X) en los estilos base
+ * 
+ * Device Coverage:
+ * - iPhone SE, Samsung Galaxy S24: 360px
+ * - iPhone 13/14/15/15 Pro: 390px-393px
+ * - Android phones modernos: 360px-480px
+ * - iPad Mini: 768px
+ * - iPad Pro: 1024px+
+ * - Monitores desktop: 1280px+
+ */
+
+:root {
+  /* Breakpoints en pixels */
+  --bp-xs: 360px;    /* Ultra pequeño: Samsung Galaxy S24 */
+  --bp-sm: 390px;    /* Small: iPhone 13/14/15 portrait */
+  --bp-md: 480px;    /* Medium: Tablets pequeños, Android grandes */
+  --bp-lg: 768px;    /* Large: iPad Mini, tablets portrait */
+  --bp-xl: 1024px;   /* Extra Large: iPad Pro, tablets landscape */
+  --bp-2xl: 1280px;  /* 2XL: Desktop */
+  --bp-3xl: 1536px;  /* 3XL: Monitores grandes */
+  
+  /* Breakpoints en ems (para rem/em scaling) */
+  --bp-xs-em: 22.5em;
+  --bp-sm-em: 24.375em;
+  --bp-md-em: 30em;
+  --bp-lg-em: 48em;
+  --bp-xl-em: 64em;
+  --bp-2xl-em: 80em;
+  --bp-3xl-em: 96em;
+
+  /* Safe Area para notch/dynamic island (se aplica automáticamente en body) */
+  --safe-area-inset-top: env(safe-area-inset-top, 0);
+  --safe-area-inset-right: env(safe-area-inset-right, 0);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0);
+  --safe-area-inset-left: env(safe-area-inset-left, 0);
+}
+
+/*
+ * MEDIA QUERY CHEATSHEET
+ * 
+ * Ultra pequeño (< 360px):
+ * @media (max-width: 359px) { }
+ * 
+ * XS (360px):
+ * @media (max-width: 389px) { }
+ * 
+ * SM-MD (390px - 479px):
+ * @media (max-width: 479px) { }
+ * @media (min-width: 390px) and (max-width: 479px) { }
+ * 
+ * MD (480px - 767px):
+ * @media (max-width: 767px) { }
+ * @media (min-width: 480px) and (max-width: 767px) { }
+ * 
+ * LG (768px - 1023px):
+ * @media (max-width: 1023px) { }
+ * @media (min-width: 768px) and (max-width: 1023px) { }
+ * 
+ * XL (1024px - 1279px):
+ * @media (max-width: 1279px) { }
+ * @media (min-width: 1024px) and (max-width: 1279px) { }
+ * 
+ * 2XL+ (1280px+):
+ * @media (min-width: 1280px) { }
+ * 
+ * Landscape:
+ * @media (orientation: landscape) { }
+ * 
+ * Touch devices:
+ * @media (hover: none) and (pointer: coarse) { }
+ * 
+ * High DPI (Retina):
+ * @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { }
+ * 
+ * Reduced motion:
+ * @media (prefers-reduced-motion: reduce) { }
+ * 
+ * Dark mode:
+ * @media (prefers-color-scheme: dark) { }
+ */

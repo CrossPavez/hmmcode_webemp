@@ -5,19 +5,18 @@ const pages = [
     url: '/',
     lastmod: new Date().toISOString().split('T')[0],
     priority: '1.0',
-    changefreq: 'daily',
+    changefreq: 'weekly',
   },
   {
     url: '/servicio-formateo',
     lastmod: new Date().toISOString().split('T')[0],
-    priority: '0.95',
+    priority: '0.9',
     changefreq: 'weekly',
   },
 ];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages
   .map(
     (page) => `  <url>
@@ -25,8 +24,6 @@ ${pages
     <lastmod>${page.lastmod}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://hmmcode.vercel.app${page.url}" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://hmmcode.vercel.app/en${page.url}" />
   </url>`
   )
   .join('\n')}

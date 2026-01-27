@@ -1,0 +1,538 @@
+---
+// 🔐 VARIABLES DE ENTORNO SEGURAS
+const FORMSPREE_ID = import.meta.env.PUBLIC_FORMSPREE_ID || 'mgvgqdap';
+const FORMSPREE_ENDPOINT = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || 'https://formspree.io/f/';
+const formAction = `${FORMSPREE_ENDPOINT}${FORMSPREE_ID}`;
+---
+
+<section class="contact" id="contacto">
+  <div class="container">
+    <div class="section-header">
+      <h2 data-i18n-es="¿Listo para comenzar?" data-i18n-en="Ready to get started?">¿Listo para comenzar?</h2>
+      <p data-i18n-es="Contacta con nosotros hoy mismo" data-i18n-en="Contact us today">
+        Contacta con nosotros hoy mismo
+      </p>
+    </div>
+
+    <div class="contact-content">
+      <div class="contact-info">
+        <div class="info-item">
+          <h3 data-i18n-es="Email" data-i18n-en="Email">Email</h3>
+          <p>
+            <a href="mailto:hmmcodecl@gmail.com">hmmcodecl@gmail.com</a>
+          </p>
+        </div>
+        <div class="info-item">
+          <h3 data-i18n-es="Teléfono" data-i18n-en="Phone">Teléfono</h3>
+          <p>
+            <a href="tel:+56948645816">+569 48645816</a>
+          </p>
+        </div>
+        <div class="info-item">
+          <h3 data-i18n-es="Ubicación" data-i18n-en="Location">Ubicación</h3>
+          <p>Santiago, Chile</p>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactFormSimple" action={formAction} method="POST" novalidate>
+        <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="form-group">
+          <label for="nombre" data-i18n-es="Nombre" data-i18n-en="Name">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email" data-i18n-es="Email" data-i18n-en="Email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="servicio" data-i18n-es="Servicio de Interés" data-i18n-en="Service of interest">Servicio de Interés</label>
+          <select id="servicio" name="servicio" required>
+            <option value="" data-i18n-es="Selecciona un servicio" data-i18n-en="Select a service">Selecciona un servicio</option>
+            <option value="basico" data-i18n-es="Mantenimiento Básico" data-i18n-en="Basic Maintenance">Mantenimiento Básico</option>
+            <option value="integral" data-i18n-es="Mantenimiento Integral" data-i18n-en="Full Maintenance">Mantenimiento Integral</option>
+            <option value="premium" data-i18n-es="Mantenimiento Premium" data-i18n-en="Premium Maintenance">Mantenimiento Premium</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="mensaje" data-i18n-es="Mensaje" data-i18n-en="Message">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="submit-btn"
+          id="contactSubmitBtn"
+          data-i18n-es="Enviar Mensaje"
+          data-i18n-en="Send Message"
+          data-submit-es="Enviar Mensaje"
+          data-submit-en="Send Message"
+          data-sending-es="Enviando..."
+          data-sending-en="Sending..."
+        >Enviar Mensaje</button>
+
+        <p class="form-status" id="contactStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  const form = document.getElementById('contactFormSimple');
+  const btn = document.getElementById('contactSubmitBtn');
+  const status = document.getElementById('contactStatus');
+
+  function currentLang() {
+    const l = (document.documentElement.lang || document.documentElement.dataset.lang || 'es').toLowerCase();
+    return l.startsWith('en') ? 'en' : l.startsWith('pt') ? 'pt' : 'es';
+  }
+
+  // 🔐 RATE LIMITING: Prevenir spam (1 envío por 5 segundos)
+  let lastFormSubmitTime = 0;
+  const RATE_LIMIT_MS = 5000;
+
+  // 🔐 SPAM DETECTION: Palabras clave de spam
+  const SPAM_WORDS = /viagra|casino|poker|crypto|bitcoin|forex|lottery|prize|winner|claim|click here|buy now|free money|make money|work from home|nigerian|prince|click.here|bit\.ly|tinyurl/gi;
+  
+  // 🔐 EMAIL VALIDATION: RFC 5322 simplified
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  // 🔐 CHILEAN PHONE: +56 9 XXXX XXXX or 9 XXXX XXXX
+  const PHONE_REGEX = /^(\+?56)?[\s]?9[\s]?\d{4}[\s]?\d{4}$/;
+
+  function t(es, en, pt) {
+    const lang = currentLang();
+    return lang === 'en' ? en : lang === 'pt' ? (pt || en) : es;
+  }
+
+  function setStatus(text) {
+    if (!status) return;
+    status.textContent = text;
+  }
+
+  // 🔐 HELPER: Detectar spam
+  function hasSpamPatterns(text) {
+    return SPAM_WORDS.test(text);
+  }
+
+  // 🔐 HELPER: Detectar enlaces sospechosos
+  function hasSuspiciousLinks(text) {
+    return /https?:\/\/|www\.|bit\.ly|tinyurl|short\.link|goo\.gl/.test(text);
+  }
+
+  // 🔐 HELPER: Detectar múltiples URLs
+  function countUrls(text) {
+    const urlPattern = /https?:\/\/|www\./g;
+    const matches = text.match(urlPattern);
+    return matches ? matches.length : 0;
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    // 🔐 Validar rate limit
+    const now = Date.now();
+    if (now - lastFormSubmitTime < RATE_LIMIT_MS) {
+      e.preventDefault();
+      return setStatus(t('Por favor espera unos segundos antes de enviar otro formulario.', 'Please wait a few seconds before sending another form.', 'Por favor aguarde alguns segundos antes de enviar outro formulário.'));
+    }
+    lastFormSubmitTime = now;
+
+    // Formspree maneja el envío automáticamente con POST
+    // Solo validación básica aquí
+    const fd = new FormData(form);
+    const company = String(fd.get('company') || '').trim();
+    if (company) {
+      e.preventDefault();
+      return; // honeypot bloqueado
+    }
+
+    const nombre = String(fd.get('nombre') || '').trim();
+    const email = String(fd.get('email') || '').trim();
+    const mensaje = String(fd.get('mensaje') || '').trim();
+
+    // 🔐 VALIDACIÓN: Nombre
+    if (!nombre || nombre.length < 2) {
+      e.preventDefault();
+      return setStatus(t('Por favor ingresa tu nombre.', 'Please enter your name.', 'Por favor insira seu nome.'));
+    }
+    if (nombre.length > 100) {
+      e.preventDefault();
+      return setStatus(t('Nombre muy largo.', 'Name too long.', 'Nome muito longo.'));
+    }
+
+    // 🔐 VALIDACIÓN: Email RFC 5322
+    if (!email) {
+      e.preventDefault();
+      return setStatus(t('Por favor ingresa tu email.', 'Please enter your email.', 'Por favor insira seu email.'));
+    }
+    if (!EMAIL_REGEX.test(email)) {
+      e.preventDefault();
+      return setStatus(t('Email inválido.', 'Invalid email.', 'Email inválido.'));
+    }
+    if (email.length > 254) {
+      e.preventDefault();
+      return setStatus(t('Email muy largo.', 'Email too long.', 'Email muito longo.'));
+    }
+
+    // 🔐 VALIDACIÓN: Mensaje
+    if (!mensaje || mensaje.length < 10) {
+      e.preventDefault();
+      return setStatus(t('Cuéntanos un poco más (mínimo 10 caracteres).', 'Please write a bit more (min 10 characters).', 'Conte-nos mais um pouco (mínimo 10 caracteres).'));
+    }
+    if (mensaje.length > 5000) {
+      e.preventDefault();
+      return setStatus(t('Mensaje muy largo.', 'Message too long.', 'Mensagem muito longa.'));
+    }
+
+    // 🔐 SPAM DETECTION: Detectar palabras de spam
+    if (hasSpamPatterns(nombre) || hasSpamPatterns(mensaje)) {
+      e.preventDefault();
+      return setStatus(t('Mensaje sospechoso detectado. Por favor revisa.', 'Suspicious message detected. Please review.', 'Mensagem suspeita detectada.'));
+    }
+
+    // 🔐 SPAM DETECTION: Detectar múltiples URLs
+    const urlCount = countUrls(mensaje);
+    if (urlCount > 2) {
+      e.preventDefault();
+      return setStatus(t('Demasiados enlaces en el mensaje.', 'Too many links in message.', 'Muitos links na mensagem.'));
+    }
+
+    // 🔐 SPAM DETECTION: Detectar URLs sospechosas (acortadores)
+    if (hasSuspiciousLinks(mensaje)) {
+      e.preventDefault();
+      return setStatus(t('Enlaces acortados no permitidos.', 'Shortened links not allowed.', 'Links encurtados não permitidos.'));
+    }
+
+    // 🔐 SPAM DETECTION: Detectar repetición excesiva
+    const wordArray = mensaje.split(/\s+/);
+    if (wordArray.length > 0) {
+      const wordFreq = {};
+      wordArray.forEach(word => {
+        const clean = word.toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (clean.length > 3) wordFreq[clean] = (wordFreq[clean] || 0) + 1;
+      });
+      const maxFreq = Math.max(...Object.values(wordFreq));
+      if (maxFreq > 10) {
+        e.preventDefault();
+        return setStatus(t('Mensaje parece repetitivo.', 'Message seems repetitive.', 'Mensagem parece repetitiva.'));
+      }
+    }
+
+    // Formspree enviará el formulario automáticamente
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = currentLang() === 'en' ? btn.dataset.sendingEn : btn.dataset.sendingEs;
+    }
+    setStatus(t('Enviando...', 'Sending...', 'Enviando...'));
+  });
+
+  // Escuchar respuesta de Formspree
+  form?.addEventListener('submit', (e) => {
+    // Después de que Formspree procesa, mostrar mensaje
+    setTimeout(() => {
+      setStatus(t('Listo. Te contactaremos pronto.', 'Done. We will contact you soon.', 'Pronto entraremos em contato.'));
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = currentLang() === 'en' ? btn.dataset.submitEn : btn.dataset.submitEs;
+      }
+    }, 1000);
+  });
+</script>
+
+<style>
+  .contact {
+    padding: 4rem 2rem;
+    background: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    color: #333;
+  }
+
+  .section-header p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+  }
+
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .info-item {
+    margin-bottom: 2rem;
+  }
+
+  .info-item h3 {
+    color: var(--brand-700);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .info-item p {
+    margin: 0;
+    color: #666;
+  }
+
+  .info-item a {
+    color: var(--brand-700);
+    text-decoration: none;
+  }
+
+  .info-item a:hover {
+    text-decoration: underline;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .form-status {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #666;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label {
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 600;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--brand-600);
+  }
+
+  .submit-btn {
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--brand-gradient-start) 0%, var(--brand-gradient-end) 100%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    /* Touch target mínimo 44px */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .submit-btn:hover {
+    opacity: 0.9;
+  }
+
+  .submit-btn:active {
+    transform: scale(0.98);
+  }
+
+  @media (max-width: 1024px) {
+    .contact {
+      padding: 3rem 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .contact {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.8rem;
+    }
+
+    .section-header p {
+      font-size: 0.95rem;
+    }
+
+    .contact-content {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .contact-form {
+      gap: 1rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px;
+      font-size: 16px;
+      min-height: 44px;
+    }
+
+    .submit-btn {
+      padding: 12px;
+      font-size: 1rem;
+      min-height: 48px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .contact {
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+      font-size: 0.85rem;
+    }
+
+    .contact-content {
+      gap: 1rem;
+    }
+
+    .info-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .info-item h3 {
+      font-size: 0.95rem;
+    }
+
+    .info-item p {
+      font-size: 0.85rem;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px;
+      font-size: 16px;
+      min-height: 44px;
+    }
+
+    .submit-btn {
+      padding: 12px;
+      font-size: 0.95rem;
+      min-height: 48px;
+      width: 100%;
+    }
+  }
+
+  /* iPhone 13/14/15 portrait (390px) */
+  @media (max-width: 389px) {
+    .section-header h2 {
+      font-size: 1.35rem;
+    }
+
+    .submit-btn {
+      padding: 11px;
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Ultra pequeño: 360px y menos */
+  @media (max-width: 359px) {
+    .contact {
+      padding: 1.5rem 0.75rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.3rem;
+    }
+
+    .section-header p {
+      font-size: 0.8rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 10px;
+      font-size: 16px;
+      min-height: 40px;
+    }
+
+    .submit-btn {
+      padding: 10px;
+    }
+  }
+
+  @media (max-height: 500px) and (orientation: landscape) {
+    .contact {
+      padding: 1.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-content {
+      gap: 1rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 8px;
+      font-size: 14px;
+      min-height: 40px;
+    }
+  }
+</style>

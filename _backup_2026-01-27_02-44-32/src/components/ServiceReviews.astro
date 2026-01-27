@@ -1,0 +1,248 @@
+---
+---
+
+<section class="reviews">
+  <div class="container">
+    <div class="section-header">
+      <h2 data-i18n-es="Lo que dicen nuestros clientes" data-i18n-en="What our clients say">Lo que dicen nuestros clientes</h2>
+      <p data-i18n-es="Reseñas verificadas de Google My Business" data-i18n-en="Verified reviews from Google Business Profile">
+        Reseñas verificadas de Google My Business
+      </p>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        <p
+          class="review-text"
+          data-i18n-es='"Excelente servicio, muy rápido y profesional. Mi computador quedó como nuevo después del formateo. Altamente recomendado!"'
+          data-i18n-en='"Excellent service—very fast and professional. My computer was like new after the formatting. Highly recommended!"'
+        >"Excelente servicio, muy rápido y profesional. Mi computador quedó como nuevo después del formateo. Altamente recomendado!"</p>
+        <p class="reviewer">Juan García - Santiago</p>
+        <p class="date" data-i18n-es="Hace 2 semanas" data-i18n-en="2 weeks ago">Hace 2 semanas</p>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        <p
+          class="review-text"
+          data-i18n-es='"El servicio a domicilio es increíble. No tuve que ir a ningún lado, todo se hizo en mi casa. Muy económico y eficiente."'
+          data-i18n-en='"The on-site service is amazing. I didn’t have to go anywhere—everything was done at home. Very affordable and efficient."'
+        >"El servicio a domicilio es increíble. No tuve que ir a ningún lado, todo se hizo en mi casa. Muy económico y eficiente."</p>
+        <p class="reviewer">María López - Ñuñoa</p>
+        <p class="date" data-i18n-es="Hace 1 mes" data-i18n-en="1 month ago">Hace 1 mes</p>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        <p
+          class="review-text"
+          data-i18n-es='"Mi laptop estaba lentísima y después del formateo vuela. El técnico fue muy profesional y explicó todo el proceso."'
+          data-i18n-en='"My laptop was extremely slow and after the formatting it flies. The technician was very professional and explained the whole process."'
+        >"Mi laptop estaba lentísima y después del formateo vuela. El técnico fue muy profesional y explicó todo el proceso."</p>
+        <p class="reviewer">Carlos Rodríguez - La Florida</p>
+        <p class="date" data-i18n-es="Hace 3 semanas" data-i18n-en="3 weeks ago">Hace 3 semanas</p>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        <p
+          class="review-text"
+          data-i18n-es='"Precio muy justo, trabajo rápido. Llegaron a la hora exacta y dejaron mi PC perfecta. Voy a recomendar a todos."'
+          data-i18n-en='"Very fair price and fast work. They arrived exactly on time and left my PC perfect. I’ll recommend to everyone."'
+        >"Precio muy justo, trabajo rápido. Llegaron a la hora exacta y dejaron mi PC perfecta. Voy a recomendar a todos."</p>
+        <p class="reviewer">Ana Martínez - Providencia</p>
+        <p class="date" data-i18n-es="Hace 1 mes" data-i18n-en="1 month ago">Hace 1 mes</p>
+      </div>
+    </div>
+
+    <div class="google-badge">
+      <p data-i18n-es="⭐ Calificación promedio: 4.9/5 en Google My Business" data-i18n-en="⭐ Average rating: 4.9/5 on Google Business Profile">
+        ⭐ Calificación promedio: 4.9/5 en Google My Business
+      </p>
+      <p
+        style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;"
+        data-i18n-es="Basado en 48 reseñas verificadas"
+        data-i18n-en="Based on 48 verified reviews"
+      >
+        Basado en 48 reseñas verificadas
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews {
+    padding: 4rem 2rem;
+    background: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    color: #333;
+  }
+
+  .section-header p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .review-card {
+    background: #f9f9f9;
+    padding: 1.8rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--brand-600);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(var(--brand-600-rgb), 0.15);
+  }
+
+  .stars {
+    margin-bottom: 1rem;
+  }
+
+  .star {
+    color: #ffc107;
+    font-size: 1.3rem;
+    margin-right: 0.2rem;
+  }
+
+  .review-text {
+    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 1rem 0;
+    font-style: italic;
+  }
+
+  .reviewer {
+    color: var(--brand-700);
+    font-weight: 600;
+    margin: 0.8rem 0 0.3rem 0;
+  }
+
+  .date {
+    color: #999;
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  .google-badge {
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      rgba(var(--brand-600-rgb), 0.10) 0%,
+      rgba(var(--brand-800-rgb), 0.10) 100%
+    );
+    padding: 2rem;
+    border-radius: 10px;
+    border: 2px solid var(--brand-600);
+  }
+
+  .google-badge p {
+    margin: 0;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 1024px) {
+    .reviews {
+      padding: 3rem 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .reviews {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.8rem;
+    }
+
+    .reviews-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .review-card {
+      padding: 1.5rem;
+    }
+
+    .review-text {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .reviews {
+      padding: 2rem 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+    }
+
+    .review-card {
+      padding: 1.2rem;
+    }
+
+    .google-badge {
+      padding: 1.5rem;
+    }
+
+    .google-badge p {
+      font-size: 0.95rem;
+    }
+  }
+</style>

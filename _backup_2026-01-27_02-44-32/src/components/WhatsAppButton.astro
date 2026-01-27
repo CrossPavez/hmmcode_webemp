@@ -1,0 +1,202 @@
+---
+/**
+ * Botón WhatsApp Flotante
+ * Visible en todo momento en móvil y desktop
+ * Anima entrada y salida
+ */
+
+interface Props {
+  phoneNumber?: string;
+  message?: string;
+  messageEn?: string;
+  position?: 'bottom-right' | 'bottom-left';
+  showLabel?: boolean;
+}
+
+const {
+  phoneNumber = '+56948645816',
+  message = 'Hola, quería consultar sobre sus servicios',
+  messageEn = "Hi, I'd like to ask about your services",
+  position = 'bottom-right',
+  showLabel = true,
+} = Astro.props;
+
+// Formatear número para WhatsApp
+const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
+const whatsappUrlEn = `https://wa.me/${phoneNumber.replace(/\D/g, '')}?text=${encodeURIComponent(messageEn)}`;
+---
+
+<div class={`whatsapp-button ${position}`}>
+  <a 
+    href={whatsappUrl}
+    data-cta-link-es={whatsappUrl}
+    data-cta-link-en={whatsappUrlEn}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="whatsapp-link"
+    title="Contactar por WhatsApp"
+    aria-label="Abrir WhatsApp"
+  >
+    <svg 
+      class="whatsapp-icon"
+      viewBox="0 0 24 24"
+      fill="white"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <!-- Teléfono con burbujas de chat -->
+      <g>
+        <!-- Círculo externo -->
+        <circle cx="12" cy="12" r="11" fill="none" stroke="white" stroke-width="0.5"/>
+        
+        <!-- Forma del teléfono/chat -->
+        <path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3 .97 4.29L2 22l6.29-.97C11 21.64 12.46 22 14 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.12 12.48h-4.24v1.12h4.24v-1.12zm0-1.87h-4.24v1.12h4.24v-1.12zm-2.12-1.87h-2.12v1.12h2.12v-1.12zm-3-0h-2.12v1.12h2.12v-1.12z" fill="white"/>
+        
+        <!-- Globos de chat simplificados -->
+        <path d="M8.5 11c-.83 0-1.5.67-1.5 1.5S7.67 14 8.5 14 10 13.33 10 12.5 9.33 11 8.5 11zm3.5 0c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm3.5 0c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z" fill="white" opacity="0.9"/>
+      </g>
+    </svg>
+    {showLabel && <span class="whatsapp-label">WhatsApp</span>}
+  </a>
+</div>
+
+<style>
+  .whatsapp-button {
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .whatsapp-button.bottom-right {
+    bottom: 2rem;
+    right: 2rem;
+  }
+
+  .whatsapp-button.bottom-left {
+    bottom: 2rem;
+    left: 2rem;
+  }
+
+  .whatsapp-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: #25d366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 14px 0 rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .whatsapp-link:hover {
+    transform: scale(1.12);
+    box-shadow: 0 8px 24px 0 rgba(37, 211, 102, 0.5);
+    width: 180px;
+  }
+
+  .whatsapp-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .whatsapp-label {
+    display: none;
+  }
+
+  .whatsapp-link:hover .whatsapp-label {
+    display: inline;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .whatsapp-button.bottom-right {
+      bottom: 1.5rem;
+      right: 1.5rem;
+    }
+
+    .whatsapp-button.bottom-left {
+      bottom: 1.5rem;
+      left: 1.5rem;
+    }
+
+    .whatsapp-link {
+      width: 56px;
+      height: 56px;
+      box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+    }
+
+    .whatsapp-icon {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .whatsapp-button.bottom-right {
+      bottom: 1rem;
+      right: 1rem;
+    }
+
+    .whatsapp-button.bottom-left {
+      bottom: 1rem;
+      left: 1rem;
+    }
+
+    .whatsapp-link {
+      width: 52px;
+      height: 52px;
+      border-width: 2px;
+    }
+
+    .whatsapp-link:hover {
+      width: 52px;
+    }
+
+    .whatsapp-label {
+      display: none !important;
+    }
+
+    .whatsapp-icon {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .whatsapp-link {
+      animation: none;
+    }
+
+    .whatsapp-link:hover {
+      transform: none;
+    }
+  }
+
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+    .whatsapp-link {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+</style>

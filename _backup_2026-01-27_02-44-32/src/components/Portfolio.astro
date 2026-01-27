@@ -1,0 +1,249 @@
+---
+import ProjectCard from './ProjectCard.astro';
+---
+
+<section class="portfolio" id="portfolio">
+  <div class="container">
+    <div class="section-header">
+      <h2 data-i18n-es="Nuestro Portafolio" data-i18n-en="Our Portfolio">Nuestro Portafolio</h2>
+      <p data-i18n-es="Proyectos realizados para nuestros clientes" data-i18n-en="Projects delivered for our clients">
+        Proyectos realizados para nuestros clientes
+      </p>
+    </div>
+
+    <div class="portfolio-grid">
+      <ProjectCard
+        title="Sistema de Gestión E-commerce"
+        titleEn="E-commerce Management System"
+        description="Plataforma de comercio electrónico completa con carrito de compras, pasarela de pago y administración de inventario."
+        descriptionEn="Complete e-commerce platform with shopping cart, payment gateway and inventory management."
+        technologies={['React', 'Node.js', 'MongoDB', 'Stripe']}
+        image="/kymyp.png"
+        link="https://ejemplo-tienda.com"
+        github="https://github.com/hmmcode"
+      />
+
+      <ProjectCard
+        title="Dashboard Analítico"
+        titleEn="Analytics Dashboard"
+        description="Panel de control para análisis de datos en tiempo real con gráficos interactivos y reportes automáticos."
+        descriptionEn="Real-time analytics dashboard with interactive charts and automated reports."
+        technologies={['Vue.js', 'D3.js', 'Python', 'PostgreSQL']}
+        image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop"
+        link="https://ejemplo-dashboard.com"
+        github="https://github.com/hmmcode"
+      />
+
+      <ProjectCard
+        title="Aplicación de Gestión de Tareas"
+        titleEn="Task Management App"
+        description="App colaborativa para administrar proyectos y tareas en equipo con sincronización en tiempo real."
+        descriptionEn="Collaborative app to manage projects and team tasks with real-time sync."
+        technologies={['React Native', 'Firebase', 'Redux']}
+        image="https://images.unsplash.com/photo-1540350881063-80cb60e85b70?w=400&h=300&fit=crop"
+        link="https://ejemplo-tasks.com"
+        github="https://github.com/hmmcode"
+      />
+
+      <ProjectCard
+        title="Landing Page Corporativa"
+        titleEn="Corporate Landing Page"
+        description="Sitio web empresarial responsivo con formularios de contacto integrados y optimización SEO avanzada."
+        descriptionEn="Responsive business website with integrated contact forms and advanced SEO optimization."
+        technologies={['Astro', 'Tailwind CSS', 'JavaScript']}
+        image="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop"
+        link="https://ejemplo-corp.com"
+        github="https://github.com/hmmcode"
+      />
+
+      <ProjectCard
+        title="Blog CMS Personalizado"
+        titleEn="Custom CMS Blog"
+        description="Sistema de gestión de contenidos con editor WYSIWYG, categorías, etiquetas y búsqueda avanzada."
+        descriptionEn="Content management system with WYSIWYG editor, categories, tags and advanced search."
+        technologies={['Next.js', 'Sanity CMS', 'Vercel']}
+        image="https://images.unsplash.com/photo-1432405972618-c60b0b51c1e7?w=400&h=300&fit=crop"
+        link="https://ejemplo-blog.com"
+        github="https://github.com/hmmcode"
+      />
+
+      <ProjectCard
+        title="API REST Escalable"
+        titleEn="Scalable REST API"
+        description="Backend robusto con autenticación JWT, autorización basada en roles y documentación con Swagger."
+        descriptionEn="Robust backend with JWT authentication, role-based authorization and Swagger documentation."
+        technologies={['Express.js', 'PostgreSQL', 'Docker', 'JWT']}
+        image="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop"
+        link="https://api-ejemplo.com"
+        github="https://github.com/hmmcode"
+      />
+    </div>
+
+    <div class="portfolio-note">
+      <p
+        data-i18n-html
+        data-i18n-es={'💡 <strong>¿Tienes un proyecto en mente?</strong> Contáctanos para discutir cómo podemos ayudarte a hacerlo realidad.'}
+        data-i18n-en={'💡 <strong>Do you have a project in mind?</strong> Contact us to discuss how we can help you make it real.'}
+      >
+        💡 <strong>¿Tienes un proyecto en mente?</strong> Contactanos para discutir cómo podemos ayudarte a hacerlo realidad.
+      </p>
+      <a href="#contacto" class="cta-link" data-i18n-es="Solicitar Presupuesto" data-i18n-en="Request a Quote">Solicitar Presupuesto</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .portfolio {
+    padding: 4rem 2rem;
+    background: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    color: #333;
+  }
+
+  .section-header p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    align-items: stretch;
+  }
+
+  .portfolio-note {
+    background: linear-gradient(
+      135deg,
+      rgba(var(--brand-600-rgb), 0.10) 0%,
+      rgba(var(--brand-800-rgb), 0.10) 100%
+    );
+    border-left: 4px solid var(--brand-600);
+    padding: 2rem;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .portfolio-note p {
+    margin: 0 0 1rem 0;
+    color: #333;
+    font-size: 1.1rem;
+  }
+
+  .cta-link {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, var(--brand-gradient-start) 0%, var(--brand-gradient-end) 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .cta-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(var(--brand-600-rgb), 0.30);
+  }
+
+  @media (max-width: 1024px) {
+    .portfolio {
+      padding: 3rem 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+    }
+
+    .portfolio-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .portfolio {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.8rem;
+    }
+
+    .section-header p {
+      font-size: 0.95rem;
+    }
+
+    .portfolio-grid {
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .portfolio-note {
+      padding: 1.5rem;
+    }
+
+    .portfolio-note p {
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .cta-link {
+      padding: 0.7rem 1.5rem;
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .portfolio {
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-header p {
+      font-size: 0.85rem;
+    }
+
+    .portfolio-grid {
+      gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+
+    .portfolio-note {
+      padding: 1.2rem;
+    }
+
+    .portfolio-note p {
+      font-size: 0.85rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .cta-link {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+    }
+  }
+</style>

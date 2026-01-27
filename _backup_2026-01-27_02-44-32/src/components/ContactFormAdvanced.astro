@@ -1,0 +1,644 @@
+---
+interface Props {
+  title?: string;
+  titleEn?: string;
+  subtitle?: string;
+  subtitleEn?: string;
+  showPhone?: boolean;
+  showSubject?: boolean;
+  submitText?: string;
+  submitTextEn?: string;
+}
+
+const {
+  title = 'Ponte en contacto',
+  titleEn,
+  subtitle = 'Completa el formulario y nos pondremos en contacto pronto',
+  subtitleEn,
+  showPhone = true,
+  showSubject = true,
+  submitText = 'Enviar Mensaje',
+  submitTextEn,
+} = Astro.props;
+
+const titleEnFinal = titleEn ?? 'Get in touch';
+const subtitleEnFinal = subtitleEn ?? 'Fill out the form and we’ll get back to you soon';
+const submitTextEnFinal = submitTextEn ?? 'Send message';
+---
+
+<section class="contact-form-section" id="contacto">
+  <div class="container">
+    <div class="form-header">
+      <h2 data-i18n-es={title} data-i18n-en={titleEnFinal}>{title}</h2>
+      <p data-i18n-es={subtitle} data-i18n-en={subtitleEnFinal}>{subtitle}</p>
+    </div>
+
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="form-group">
+        <label for="name" data-i18n-es="Nombre completo *" data-i18n-en="Full name *">Nombre completo *</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Tu nombre"
+          data-i18n-attr="placeholder"
+          data-i18n-es="Tu nombre"
+          data-i18n-en="Your name"
+          required
+          minlength="3"
+          maxlength="100"
+          aria-required="true"
+          aria-label="Nombre completo"
+          data-i18n-attr="aria-label"
+          data-i18n-es="Nombre completo"
+          data-i18n-en="Full name"
+        />
+        <span class="error-message" id="nameError"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="email" data-i18n-es="Correo electrónico *" data-i18n-en="Email *">Correo electrónico *</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="tu@email.com"
+          required
+          aria-required="true"
+          aria-label="Correo electrónico"
+          data-i18n-attr="aria-label"
+          data-i18n-es="Correo electrónico"
+          data-i18n-en="Email"
+        />
+        <span class="error-message" id="emailError"></span>
+      </div>
+
+      {showPhone && (
+        <div class="form-group">
+          <label for="phone" data-i18n-es="Teléfono" data-i18n-en="Phone">Teléfono</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="+56 9 1234 5678"
+            pattern="[0-9+\s\-()]*"
+            maxlength="20"
+            aria-label="Teléfono"
+            data-i18n-attr="aria-label"
+            data-i18n-es="Teléfono"
+            data-i18n-en="Phone"
+          />
+          <span class="error-message" id="phoneError"></span>
+        </div>
+      )}
+
+      {showSubject && (
+        <div class="form-group">
+          <label for="subject" data-i18n-es="Asunto *" data-i18n-en="Subject *">Asunto *</label>
+          <select
+            id="subject"
+            name="subject"
+            required
+            aria-required="true"
+            aria-label="Seleccionar asunto"
+            data-i18n-attr="aria-label"
+            data-i18n-es="Seleccionar asunto"
+            data-i18n-en="Select subject"
+          >
+            <option value="" data-i18n-es="Selecciona un asunto" data-i18n-en="Select a subject">Selecciona un asunto</option>
+            <option value="formateo" data-i18n-es="Servicio de Formateo" data-i18n-en="Formatting service">Servicio de Formateo</option>
+            <option value="mantenimiento" data-i18n-es="Mantenimiento General" data-i18n-en="General maintenance">Mantenimiento General</option>
+            <option value="reparacion" data-i18n-es="Reparación" data-i18n-en="Repair">Reparación</option>
+            <option value="optimizacion" data-i18n-es="Optimización" data-i18n-en="Optimization">Optimización</option>
+            <option value="otro" data-i18n-es="Otro" data-i18n-en="Other">Otro</option>
+          </select>
+          <span class="error-message" id="subjectError"></span>
+        </div>
+      )}
+
+      <div class="form-group">
+        <label for="message" data-i18n-es="Mensaje *" data-i18n-en="Message *">Mensaje *</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Cuéntanos qué necesitas..."
+          data-i18n-attr="placeholder"
+          data-i18n-es="Cuéntanos qué necesitas..."
+          data-i18n-en="Tell us what you need..."
+          required
+          minlength="10"
+          maxlength="2000"
+          rows="5"
+          aria-required="true"
+          aria-label="Mensaje"
+          data-i18n-attr="aria-label"
+          data-i18n-es="Mensaje"
+          data-i18n-en="Message"
+        ></textarea>
+        <span class="error-message" id="messageError"></span>
+        <span class="char-count"><span id="charCount">0</span>/2000</span>
+      </div>
+
+      <div class="form-group checkbox">
+        <input
+          type="checkbox"
+          id="terms"
+          name="terms"
+          required
+          aria-required="true"
+        />
+        <label for="terms">
+          <span
+            data-i18n-es="Acepto la política de privacidad y términos de servicio *"
+            data-i18n-en="I accept the privacy policy and terms of service *"
+          >Acepto la política de privacidad y términos de servicio *</span>
+        </label>
+        <span class="error-message" id="termsError"></span>
+      </div>
+
+      <button
+        type="submit"
+        class="submit-btn"
+        id="submitBtn"
+        data-i18n-es={submitText}
+        data-i18n-en={submitTextEnFinal}
+        data-submit-es={submitText}
+        data-submit-en={submitTextEnFinal}
+        data-sending-es="Enviando..."
+        data-sending-en="Sending..."
+      >{submitText}</button>
+
+      <div class="success-message" id="successMessage">
+        <span
+          data-i18n-es="✓ Mensaje enviado correctamente. Te contactaremos pronto."
+          data-i18n-en="✓ Message sent successfully. We’ll contact you soon."
+        >✓ Mensaje enviado correctamente. Te contactaremos pronto.</span>
+      </div>
+
+      <div class="error-message-general" id="generalError"></div>
+    </form>
+
+    <div class="contact-info">
+      <div class="info-item">
+        <span class="info-icon">📞</span>
+        <div>
+          <h4>Teléfono</h4>
+          <a href="tel:+56948645816">+56 9 48645816</a>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span class="info-icon">📧</span>
+        <div>
+          <h4>Email</h4>
+          <a href="mailto:hmmcodecl@gmail.com">hmmcodecl@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span class="info-icon">📍</span>
+        <div>
+          <h4>Ubicación</h4>
+          <p data-i18n-es="Santiago, Chile" data-i18n-en="Santiago, Chile">Santiago, Chile</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-form-section {
+    padding: 4rem 2rem;
+    background: #f9f9f9;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .form-header h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin: 0 0 1rem 0;
+    color: #1a1a1a;
+    font-weight: 700;
+  }
+
+  .form-header p {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    color: #666;
+    margin: 0;
+  }
+
+  .contact-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 3rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.85rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    min-height: 44px;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background-color: #f8f9ff;
+  }
+
+  .form-group input:invalid:not(:placeholder-shown),
+  .form-group select:invalid,
+  .form-group textarea:invalid:not(:placeholder-shown) {
+    border-color: #e74c3c;
+  }
+
+  .form-group input:valid:not(:placeholder-shown),
+  .form-group textarea:valid:not(:placeholder-shown) {
+    border-color: #27ae60;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-group.checkbox {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .form-group.checkbox input {
+    margin-top: 0.5rem;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    min-height: auto;
+  }
+
+  .form-group.checkbox label {
+    margin: 0;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .error-message {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    display: none;
+  }
+
+  .error-message.show {
+    display: block;
+  }
+
+  .error-message-general {
+    color: #e74c3c;
+    padding: 1rem;
+    background: #fadbd8;
+    border-radius: 6px;
+    margin-top: 1rem;
+    display: none;
+    text-align: center;
+  }
+
+  .error-message-general.show {
+    display: block;
+  }
+
+  .success-message {
+    color: #27ae60;
+    padding: 1rem;
+    background: #d5f4e6;
+    border-radius: 6px;
+    margin-top: 1rem;
+    display: none;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .success-message.show {
+    display: block;
+  }
+
+  .char-count {
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 0.3rem;
+  }
+
+  .submit-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 48px;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .info-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .info-icon {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+  }
+
+  .info-item h4 {
+    margin: 0 0 0.5rem 0;
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+
+  .info-item p,
+  .info-item a {
+    margin: 0;
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .info-item a:hover {
+    color: #667eea;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .contact-form-section {
+      padding: 2.5rem 1rem;
+    }
+
+    .contact-form {
+      padding: 1.5rem;
+    }
+
+    .form-header h2 {
+      font-size: 1.8rem;
+    }
+
+    .contact-info {
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-form-section {
+      padding: 2rem 0.75rem;
+    }
+
+    .contact-form {
+      padding: 1rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem;
+      font-size: 16px;
+    }
+
+    .submit-btn {
+      padding: 0.9rem 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-info {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus,
+    .submit-btn,
+    .info-item a {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement;
+  const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+  const successMessage = document.getElementById('successMessage');
+  const generalError = document.getElementById('generalError');
+  const messageInput = document.getElementById('message') as HTMLTextAreaElement;
+  const charCount = document.getElementById('charCount');
+
+  // Actualizar contador de caracteres
+  if (messageInput) {
+    messageInput.addEventListener('input', () => {
+      if (charCount) {
+        charCount.textContent = messageInput.value.length;
+      }
+    });
+  }
+
+  function getCurrentLang() {
+    return (document.documentElement.lang || document.documentElement.dataset.lang || 'es').toLowerCase();
+  }
+
+  function isEnglish() {
+    return getCurrentLang().startsWith('en');
+  }
+
+  function t(es: string, en: string) {
+    return isEnglish() ? en : es;
+  }
+
+  // Validación y envío del formulario
+  if (form) {
+    form.addEventListener('submit', async (e: Event) => {
+      e.preventDefault();
+
+      // Limpiar mensajes previos
+      if (successMessage) successMessage.classList.remove('show');
+      if (generalError) {
+        generalError.classList.remove('show');
+        generalError.textContent = '';
+      }
+
+      // Validar campos
+      const formData = new FormData(form);
+      let isValid = true;
+      const errors: { [key: string]: string } = {};
+
+      // Validación personalizada
+      const name = formData.get('name') as string;
+      if (!name || name.trim().length < 3) {
+        errors['name'] = t('El nombre debe tener al menos 3 caracteres', 'Name must be at least 3 characters long');
+        isValid = false;
+      }
+
+      const email = formData.get('email') as string;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        errors['email'] = t('Por favor ingresa un email válido', 'Please enter a valid email');
+        isValid = false;
+      }
+
+      const subject = formData.get('subject') as string;
+      if (!subject) {
+        errors['subject'] = t('Por favor selecciona un asunto', 'Please select a subject');
+        isValid = false;
+      }
+
+      const message = formData.get('message') as string;
+      if (!message || message.trim().length < 10) {
+        errors['message'] = t('El mensaje debe tener al menos 10 caracteres', 'Message must be at least 10 characters long');
+        isValid = false;
+      }
+
+      const terms = form.querySelector('#terms') as HTMLInputElement;
+      if (!terms.checked) {
+        errors['terms'] = t('Debes aceptar los términos de servicio', 'You must accept the terms of service');
+        isValid = false;
+      }
+
+      // Mostrar errores
+      Object.entries(errors).forEach(([field, message]) => {
+        const errorElement = document.getElementById(`${field}Error`);
+        if (errorElement) {
+          errorElement.textContent = message;
+          errorElement.classList.add('show');
+        }
+      });
+
+      if (!isValid) return;
+
+      // Desabilitar botón durante envío
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        const sendingText = isEnglish() ? submitBtn.dataset.sendingEn : submitBtn.dataset.sendingEs;
+        submitBtn.textContent = sendingText || t('Enviando...', 'Sending...');
+      }
+
+      try {
+        const payload = {
+          name: String(formData.get('name') || '').trim(),
+          email: String(formData.get('email') || '').trim(),
+          phone: String(formData.get('phone') || '').trim(),
+          subject: String(formData.get('subject') || '').trim(),
+          message: String(formData.get('message') || '').trim(),
+          company: String(formData.get('company') || '').trim(),
+        };
+
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data?.ok) {
+          throw new Error(data?.error || 'Request failed');
+        }
+
+        // Mostrar mensaje de éxito
+        if (successMessage) {
+          successMessage.classList.add('show');
+        }
+
+        // Limpiar formulario
+        form.reset();
+        if (charCount) charCount.textContent = '0';
+
+        // Hacer scroll al mensaje de éxito
+        successMessage?.scrollIntoView({ behavior: 'smooth' });
+      } catch (error) {
+        console.error('Error al enviar formulario:', error);
+        if (generalError) {
+          generalError.textContent = t(
+            'No se pudo enviar desde aquí. Se abrirá tu correo para enviarlo manualmente.',
+            'Could not send from here. Your email app will open to send it manually.'
+          );
+          generalError.classList.add('show');
+        }
+
+        // Fallback (astro dev no tiene /api/contact): abre mailto
+        const subjectLabel = String((document.getElementById('subject') as HTMLSelectElement | null)?.selectedOptions?.[0]?.textContent || '').trim();
+        const mailtoSubject = encodeURIComponent(`[Hmmcode] ${t('Contacto web', 'Website contact')} - ${subjectLabel || ''}`.trim());
+        const mailtoBody = encodeURIComponent(
+          `${t('Nombre', 'Name')}: ${String(formData.get('name') || '').trim()}\n` +
+          `${t('Email', 'Email')}: ${String(formData.get('email') || '').trim()}\n` +
+          `${t('Teléfono', 'Phone')}: ${String(formData.get('phone') || '').trim()}\n` +
+          `${t('Asunto', 'Subject')}: ${subjectLabel || '-'}\n\n` +
+          `${t('Mensaje', 'Message')}:\n${String(formData.get('message') || '').trim()}`
+        );
+        window.location.href = `mailto:hmmcodecl@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          const submitText = isEnglish() ? submitBtn.dataset.submitEn : submitBtn.dataset.submitEs;
+          submitBtn.textContent = submitText || t('Enviar Mensaje', 'Send message');
+        }
+      }
+    });
+  }
+</script>

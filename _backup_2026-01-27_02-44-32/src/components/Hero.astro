@@ -1,0 +1,235 @@
+---
+---
+
+<section class="hero" id="inicio">
+  <div class="container">
+    <div class="hero-content">
+      <h2
+        data-i18n-es="Mantenimiento Profesional para PC, Laptops y Consolas"
+        data-i18n-en="Professional Maintenance for PCs, Laptops and Consoles"
+        data-i18n-pt="Manutenção Profissional para PCs, Laptops e Consoles"
+      >Mantenimiento Profesional para PC, Laptops y Consolas</h2>
+      <p
+        data-i18n-es="Somos especialistas en mantenimiento, reparación y optimización de equipos electrónicos. Mantén tus dispositivos funcionando al máximo rendimiento."
+        data-i18n-en="We specialize in maintenance, repair and optimization of electronic devices. Keep your devices running at peak performance."
+        data-i18n-pt="Somos especialistas em manutenção, reparo e otimização de equipamentos eletrônicos. Mantenha seus dispositivos funcionando no desempenho máximo."
+      >
+        Somos especialistas en mantenimiento, reparación y optimización de equipos electrónicos.
+        Mantén tus dispositivos funcionando al máximo rendimiento.
+      </p>
+      <div class="button-group">
+        <a
+          href="https://wa.me/56948645816?text=Hola%20Hmmcode,%20quiero%20cotizar%20un%20servicio%20para%20mi%20equipo"
+          data-cta-link-es="https://wa.me/56948645816?text=Hola%20Hmmcode,%20quiero%20cotizar%20un%20servicio%20para%20mi%20equipo"
+          data-cta-link-en="https://wa.me/56948645816?text=Hi%20Hmmcode,%20I%20want%20to%20get%20a%20quote%20for%20a%20service%20for%20my%20device"
+          data-cta-link-pt="https://wa.me/56948645816?text=Olá%20Hmmcode,%20gostaria%20de%20um%20orçamento%20para%20um%20serviço%20para%20meu%20equipamento"
+          class="cta-button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span data-i18n-es="Cotizar por WhatsApp" data-i18n-en="Get a Quote on WhatsApp" data-i18n-pt="Obter Orçamento no WhatsApp">Cotizar por WhatsApp</span>
+        </a>
+        <a
+          href="#servicios"
+          class="cta-button secondary"
+          data-i18n-es="Ver planes"
+          data-i18n-en="See plans"
+          data-i18n-pt="Ver planos"
+        >Ver planes</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, var(--brand-gradient-start) 0%, var(--brand-gradient-end) 100%);
+    color: white;
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-content h2 {
+    font-size: clamp(1.6rem, 4vw, 3rem);
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+    margin: 0 0 2rem 0;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    background: white;
+    color: var(--brand-700);
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border: 2px solid white;
+    cursor: pointer;
+  }
+
+  .cta-button.secondary {
+    background: transparent;
+    color: white;
+    border-color: white;
+  }
+
+  .cta-button:active {
+    transform: scale(0.98);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .cta-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: 767px) {
+    .hero {
+      padding: 3.5rem 2rem;
+    }
+
+    .hero-content h2 {
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-content p {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .button-group {
+      gap: 0.75rem;
+    }
+
+    .cta-button {
+      padding: 0.9rem 1.8rem;
+      font-size: 0.95rem;
+      min-height: 48px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .hero {
+      padding: 2.5rem 1rem;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    .hero-content h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-content p {
+      font-size: 0.85rem;
+      margin-bottom: 1.2rem;
+      max-width: 100%;
+    }
+
+    .button-group {
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-button {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.85rem;
+      min-height: 44px;
+      width: 100%;
+    }
+  }
+
+  /* iPhone 13/14/15 portrait (390px) */
+  @media (max-width: 389px) {
+    .hero-content h2 {
+      font-size: 1.3rem;
+    }
+
+    .cta-button {
+      padding: 0.75rem 1.2rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  /* Ultra pequeño: 360px y menos */
+  @media (max-width: 359px) {
+    .hero {
+      padding: 2rem 0.75rem;
+    }
+
+    .hero-content h2 {
+      font-size: 1.25rem;
+    }
+
+    .hero-content p {
+      font-size: 0.8rem;
+    }
+
+    .button-group {
+      width: 95%;
+    }
+
+    .cta-button {
+      width: 100%;
+    }
+  }
+
+  @media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+      padding: 2rem;
+    }
+
+    .hero-content h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-content p {
+      font-size: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .button-group {
+      gap: 0.5rem;
+    }
+
+    .cta-button {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.8rem;
+    }
+  }
+</style>

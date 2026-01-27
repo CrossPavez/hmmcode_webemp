@@ -1,0 +1,346 @@
+---
+/**
+ * CRO Banner - Conversion Rate Optimization
+ * Muestra urgencia, confianza y valor
+ */
+
+interface Props {
+  title?: string;
+  titleEn?: string;
+  titlePt?: string;
+  subtitle?: string;
+  subtitleEn?: string;
+  subtitlePt?: string;
+  showUrgency?: boolean;
+  urgencyText?: string;
+  urgencyTextEn?: string;
+  urgencyTextPt?: string;
+  ctaText?: string;
+  ctaTextEn?: string;
+  ctaTextPt?: string;
+  ctaLink?: string;
+  ctaLinkEn?: string;
+  ctaLinkPt?: string;
+}
+
+const {
+  title = '⚡ Agenda tu servicio hoy',
+  titleEn,
+  titlePt,
+  subtitle = 'Atención rápida para PC, laptops y consolas',
+  subtitleEn,
+  subtitlePt,
+  showUrgency = true,
+  urgencyText = 'Respuesta en menos de 24 horas',
+  urgencyTextEn,
+  urgencyTextPt,
+  ctaText = 'Agendar Ahora',
+  ctaTextEn,
+  ctaTextPt,
+  ctaLink = '/servicio-formateo',
+  ctaLinkEn,
+  ctaLinkPt,
+} = Astro.props;
+
+const titleEnFinal = titleEn ?? '⚡ Book your service today';
+const titlePtFinal = titlePt ?? titleEn ?? '\u26a1 Agende seu serviço hoje';
+const subtitleEnFinal = subtitleEn ?? 'Fast support for PCs, laptops and consoles';
+const subtitlePtFinal = subtitlePt ?? subtitleEn ?? 'Suporte rápido para PCs, laptops e consoles';
+const urgencyTextEnFinal = urgencyTextEn ?? 'Reply in under 24 hours';
+const urgencyTextPtFinal = urgencyTextPt ?? urgencyTextEn ?? 'Resposta em menos de 24 horas';
+const ctaTextEnFinal = ctaTextEn ?? 'Book now';
+const ctaTextPtFinal = ctaTextPt ?? ctaTextEnFinal ?? 'Agendar agora';
+const ctaLinkEnFinal = ctaLinkEn ?? ctaLink;
+const ctaLinkPtFinal = ctaLinkPt ?? ctaLinkEnFinal ?? ctaLink;
+---
+
+<section class="cro-banner">
+  <div class="container">
+    <div class="content">
+      <h2 class="title" data-i18n-es={title} data-i18n-en={titleEnFinal} data-i18n-pt={titlePtFinal}>{title}</h2>
+      <p class="subtitle" data-i18n-es={subtitle} data-i18n-en={subtitleEnFinal} data-i18n-pt={subtitlePtFinal}>{subtitle}</p>
+      
+      {showUrgency && (
+        <div class="urgency-badge">
+          <span class="pulse"></span>
+          <span data-i18n-es={urgencyText} data-i18n-en={urgencyTextEnFinal} data-i18n-pt={urgencyTextPtFinal}>{urgencyText}</span>
+        </div>
+      )}
+
+      <div class="cta-group">
+        <a
+          href={ctaLink}
+          class="cta-button primary"
+          data-cta-link-es={ctaLink}
+          data-cta-link-en={ctaLinkEnFinal}
+          data-cta-link-pt={ctaLinkPtFinal}
+        >
+          <span data-i18n-es={ctaText} data-i18n-en={ctaTextEnFinal} data-i18n-pt={ctaTextPtFinal}>{ctaText}</span> →
+        </a>
+        <p
+          class="trust-text"
+          data-i18n-es="✓ Diagnóstico claro | ✓ Sin compromiso"
+          data-i18n-en="✓ Clear diagnosis | ✓ No commitment"
+        >
+          ✓ Diagnóstico claro | ✓ Sin compromiso
+        </p>
+      </div>
+    </div>
+
+    <div class="benefits">
+      <div class="benefit">
+        <span class="benefit-icon">⏱️</span>
+        <span class="benefit-text" data-i18n-es="2-3 horas" data-i18n-en="2–3 hours">2-3 horas</span>
+      </div>
+      <div class="benefit">
+        <span class="benefit-icon">🏠</span>
+        <span class="benefit-text" data-i18n-es="A domicilio" data-i18n-en="On-site">A domicilio</span>
+      </div>
+      <div class="benefit">
+        <span class="benefit-icon">✅</span>
+        <span class="benefit-text" data-i18n-es="Transparente" data-i18n-en="Transparent">Transparente</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cro-banner {
+    background: linear-gradient(135deg, var(--brand-gradient-start) 0%, var(--brand-gradient-end) 100%);
+    color: white;
+    padding: 3rem 2rem;
+    margin: 2rem 0;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cro-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .title {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    margin: 0;
+    opacity: 0.95;
+    line-height: 1.4;
+  }
+
+  .urgency-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    width: fit-content;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .pulse {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #ff6b6b;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.2);
+    }
+  }
+
+  .cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: var(--brand-700);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    min-height: 48px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid white;
+    cursor: pointer;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background: #f0f0f0;
+  }
+
+  .cta-button:active {
+    transform: translateY(-1px);
+  }
+
+  .trust-text {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    text-align: center;
+  }
+
+  .benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .benefit {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .benefit-icon {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .benefit-text {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .cro-banner {
+      padding: 2rem 1.5rem;
+    }
+
+    .container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .title {
+      font-size: 1.8rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .cta-button {
+      padding: 0.9rem 1.8rem;
+      font-size: 1rem;
+    }
+
+    .benefits {
+      flex-direction: row;
+      gap: 1rem;
+    }
+
+    .benefit {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cro-banner {
+      padding: 1.5rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .title {
+      font-size: 1.4rem;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+    }
+
+    .urgency-badge {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+    }
+
+    .benefits {
+      gap: 0.75rem;
+    }
+
+    .benefit {
+      padding: 0.6rem;
+    }
+
+    .benefit-icon {
+      font-size: 1.5rem;
+    }
+
+    .benefit-text {
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-button,
+    .pulse {
+      transition: none;
+      animation: none;
+    }
+  }
+</style>
