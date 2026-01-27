@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
 
+const SITE_URL = 'https://hmmcode.cl';
+
 const pages = [
   {
     url: '/',
@@ -21,12 +23,12 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 ${pages
   .map(
     (page) => `  <url>
-    <loc>https://hmmcode.vercel.app${page.url}</loc>
+    <loc>${SITE_URL}${page.url}</loc>
     <lastmod>${page.lastmod}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://hmmcode.vercel.app${page.url}" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://hmmcode.vercel.app/en${page.url}" />
+    <xhtml:link rel="alternate" hreflang="es" href="${SITE_URL}${page.url}" />
+    <xhtml:link rel="alternate" hreflang="en" href="${SITE_URL}/en${page.url}" />
   </url>`
   )
   .join('\n')}
